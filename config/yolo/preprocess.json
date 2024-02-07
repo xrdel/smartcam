@@ -1,0 +1,20 @@
+{
+  "xclbin-location": "/lib/firmware/xilinx/kv260-smartcam/kv260-smartcam.xclbin",
+  "vvas-library-repo": "/opt/xilinx/kv260-smartcam/lib",
+  "element-mode": "transform",
+  "kernels": [
+    {
+      "kernel-name": "pp_pipeline_accel:{pp_pipeline_accel_1}",
+      "library-name": "libvvas_xpp.so",
+      "config": {
+        "debug_level": 1,
+        "mean_r": 0,
+        "mean_g": 0,
+        "mean_b": 0,
+        "scale_r": 0.25,
+        "scale_g": 0.25,
+        "scale_b": 0.25
+      }
+    }
+  ]
+}
