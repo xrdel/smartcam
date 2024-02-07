@@ -1,0 +1,406 @@
+{
+	"model-name": "yolov3_coco_416_tf2",
+	"num-labels": 80,
+	"labels": [
+		{
+			"label": 1,
+			"name": "person",
+			"display_name": "person"
+		},
+		{
+			"label": 2,
+			"name": "bicycle",
+			"display_name": "bicycle"
+		},
+		{
+			"label": 3,
+			"name": "car",
+			"display_name": "car"
+		},
+		{
+			"label": 4,
+			"name": "motorcycle",
+			"display_name": "motorcycle"
+		},
+		{
+			"label": 5,
+			"name": "airplane",
+			"display_name": "airplane"
+		},
+		{
+			"label": 6,
+			"name": "bus",
+			"display_name": "bus"
+		},
+		{
+			"label": 7,
+			"name": "train",
+			"display_name": "train"
+		},
+		{
+			"label": 8,
+			"name": "truck",
+			"display_name": "truck"
+		},
+		{
+			"label": 9,
+			"name": "boat",
+			"display_name": "boat"
+		},
+		{
+			"label": 10,
+			"name": "traffic light",
+			"display_name": "traffic light"
+		},
+		{
+			"label": 11,
+			"name": "fire hydrant",
+			"display_name": "fire hydrant"
+		},
+		{
+			"label": 13,
+			"name": "stop sign",
+			"display_name": "stop sign"
+		},
+		{
+			"label": 14,
+			"name": "parking meter",
+			"display_name": "parking meter"
+		},
+		{
+			"label": 15,
+			"name": "bench",
+			"display_name": "bench"
+		},
+		{
+			"label": 16,
+			"name": "bird",
+			"display_name": "bird"
+		},
+		{
+			"label": 17,
+			"name": "cat",
+			"display_name": "cat"
+		},
+		{
+			"label": 18,
+			"name": "dog",
+			"display_name": "dog"
+		},
+		{
+			"label": 19,
+			"name": "horse",
+			"display_name": "horse"
+		},
+		{
+			"label": 20,
+			"name": "sheep",
+			"display_name": "sheep"
+		},
+		{
+			"label": 21,
+			"name": "cow",
+			"display_name": "cow"
+		},
+		{
+			"label": 22,
+			"name": "elephant",
+			"display_name": "elephant"
+		},
+		{
+			"label": 23,
+			"name": "bear",
+			"display_name": "bear"
+		},
+		{
+			"label": 24,
+			"name": "zebra",
+			"display_name": "zebra"
+		},
+		{
+			"label": 25,
+			"name": "giraffe",
+			"display_name": "giraffe"
+		},
+		{
+			"label": 27,
+			"name": "backpack",
+			"display_name": "backpack"
+		},
+		{
+			"label": 28,
+			"name": "umbrella",
+			"display_name": "umbrella"
+		},
+		{
+			"label": 31,
+			"name": "handbag",
+			"display_name": "handbag"
+		},
+		{
+			"label": 32,
+			"name": "tie",
+			"display_name": "tie"
+		},
+		{
+			"label": 33,
+			"name": "suitcase",
+			"display_name": "suitcase"
+		},
+		{
+			"label": 34,
+			"name": "frisbee",
+			"display_name": "frisbee"
+		},
+		{
+			"label": 35,
+			"name": "skis",
+			"display_name": "skis"
+		},
+		{
+			"label": 36,
+			"name": "snowboard",
+			"display_name": "snowboard"
+		},
+		{
+			"label": 37,
+			"name": "sports ball",
+			"display_name": "sports ball"
+		},
+		{
+			"label": 38,
+			"name": "kite",
+			"display_name": "kite"
+		},
+		{
+			"label": 39,
+			"name": "baseball bat",
+			"display_name": "baseball bat"
+		},
+		{
+			"label": 40,
+			"name": "baseball glove",
+			"display_name": "baseball glove"
+		},
+		{
+			"label": 41,
+			"name": "skateboard",
+			"display_name": "skateboard"
+		},
+		{
+			"label": 42,
+			"name": "surfboard",
+			"display_name": "surfboard"
+		},
+		{
+			"label": 43,
+			"name": "tennis racket",
+			"display_name": "tennis racket"
+		},
+		{
+			"label": 44,
+			"name": "bottle",
+			"display_name": "bottle"
+		},
+		{
+			"label": 46,
+			"name": "wine glass",
+			"display_name": "wine glass"
+		},
+		{
+			"label": 47,
+			"name": "cup",
+			"display_name": "cup"
+		},
+		{
+			"label": 48,
+			"name": "fork",
+			"display_name": "fork"
+		},
+		{
+			"label": 49,
+			"name": "knife",
+			"display_name": "knife"
+		},
+		{
+			"label": 50,
+			"name": "spoon",
+			"display_name": "spoon"
+		},
+		{
+			"label": 51,
+			"name": "bowl",
+			"display_name": "bowl"
+		},
+		{
+			"label": 52,
+			"name": "banana",
+			"display_name": "banana"
+		},
+		{
+			"label": 53,
+			"name": "apple",
+			"display_name": "apple"
+		},
+		{
+			"label": 54,
+			"name": "sandwich",
+			"display_name": "sandwich"
+		},
+		{
+			"label": 55,
+			"name": "orange",
+			"display_name": "orange"
+		},
+		{
+			"label": 56,
+			"name": "broccoli",
+			"display_name": "broccoli"
+		},
+		{
+			"label": 57,
+			"name": "carrot",
+			"display_name": "carrot"
+		},
+		{
+			"label": 58,
+			"name": "hot dog",
+			"display_name": "hot dog"
+		},
+		{
+			"label": 59,
+			"name": "pizza",
+			"display_name": "pizza"
+		},
+		{
+			"label": 60,
+			"name": "donut",
+			"display_name": "donut"
+		},
+		{
+			"label": 61,
+			"name": "cake",
+			"display_name": "cake"
+		},
+		{
+			"label": 62,
+			"name": "chair",
+			"display_name": "chair"
+		},
+		{
+			"label": 63,
+			"name": "couch",
+			"display_name": "couch"
+		},
+		{
+			"label": 64,
+			"name": "potted plant",
+			"display_name": "potted plant"
+		},
+		{
+			"label": 65,
+			"name": "bed",
+			"display_name": "bed"
+		},
+		{
+			"label": 67,
+			"name": "dining table",
+			"display_name": "dining table"
+		},
+		{
+			"label": 70,
+			"name": "toilet",
+			"display_name": "toilet"
+		},
+		{
+			"label": 72,
+			"name": "tv",
+			"display_name": "tv"
+		},
+		{
+			"label": 73,
+			"name": "laptop",
+			"display_name": "laptop"
+		},
+		{
+			"label": 74,
+			"name": "mouse",
+			"display_name": "mouse"
+		},
+		{
+			"label": 75,
+			"name": "remote",
+			"display_name": "remote"
+		},
+		{
+			"label": 76,
+			"name": "keyboard",
+			"display_name": "keyboard"
+		},
+		{
+			"label": 77,
+			"name": "cell phone",
+			"display_name": "cell phone"
+		},
+		{
+			"label": 78,
+			"name": "microwave",
+			"display_name": "microwave"
+		},
+		{
+			"label": 79,
+			"name": "oven",
+			"display_name": "oven"
+		},
+		{
+			"label": 80,
+			"name": "toaster",
+			"display_name": "toaster"
+		},
+		{
+			"label": 81,
+			"name": "sink",
+			"display_name": "sink"
+		},
+		{
+			"label": 82,
+			"name": "refrigexrator",
+			"display_name": "refrigexrator"
+		},
+		{
+			"label": 84,
+			"name": "book",
+			"display_name": "book"
+		},
+		{
+			"label": 85,
+			"name": "clock",
+			"display_name": "clock"
+		},
+		{
+			"label": 86,
+			"name": "vase",
+			"display_name": "vase"
+		},
+		{
+			"label": 87,
+			"name": "scissors",
+			"display_name": "scissors"
+		},
+		{
+			"label": 88,
+			"name": "teddy bear",
+			"display_name": "teddy bear"
+		},
+		{
+			"label": 89,
+			"name": "hair drier",
+			"display_name": "hair drier"
+		},
+		{
+			"label": 90,
+			"name": "toothbrush",
+			"display_name": "toothbrush"
+		}
+	]
+}
