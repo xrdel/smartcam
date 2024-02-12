@@ -57,6 +57,7 @@ install(PROGRAMS
     script/02.mipi-dp.sh
     script/03.file-file.sh
     script/04.file-ssd-dp.sh
+    script/05.file-yolo-dp.sh
     script/smartcam-install.py
     DESTINATION ${INSTALL_PATH}/bin)
 
@@ -70,12 +71,14 @@ install(DIRECTORY
     config/facedetect
     config/refinedet
     config/ssd
+    config/yolo
     DESTINATION ${INSTALL_PATH}/share/vvas/)
 
 install(DIRECTORY
     models/kv260/densebox_640_360
-	models/kv260/refinedet_pruned_0_96
-	models/kv260/ssd_adas_pruned_0_95
+    models/kv260/refinedet_pruned_0_96
+    models/kv260/ssd_adas_pruned_0_95
+    models/kv260/yolov3_coco_416_tf2
     DESTINATION ${INSTALL_PATH}/share/vitis_ai_library/models/)
 
 install(DIRECTORY
