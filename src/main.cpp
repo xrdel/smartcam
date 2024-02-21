@@ -75,7 +75,7 @@ static GOptionEntry entries[] =
     { "port", 'p', 0, G_OPTION_ARG_STRING, &port,
         "Port to listen on (default: " DEFAULT_RTSP_PORT ")", DEFAULT_RTSP_PORT},
 
-    { "aitask", 'a', 0, G_OPTION_ARG_STRING, &aitask, "select AI task to be run: [facedetect|ssd|refinedet|yolo]" },
+    { "aitask", 'a', 0, G_OPTION_ARG_STRING, &aitask, "select AI task to be run: [facedetect|ssd|refinedet|yolo|yolox]" },
     { "nodet", 'n', 0, G_OPTION_ARG_NONE, &nodet, "no AI inference", NULL },
     { "audio", 'A', 0, G_OPTION_ARG_NONE, &audio, "RTSP with I2S audio", NULL },
     { "report", 'R', 0, G_OPTION_ARG_NONE, &reportFps, "report fps", NULL },

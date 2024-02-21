@@ -59,6 +59,7 @@ install(PROGRAMS
     script/04.file-ssd-dp.sh
     script/05.file-yolo-dp.sh
     script/smartcam-install.py
+    script/tl_and_stop.nv12
     DESTINATION ${INSTALL_PATH}/bin)
 
 install(FILES
@@ -72,6 +73,7 @@ install(DIRECTORY
     config/refinedet
     config/ssd
     config/yolo
+    config/yolox
     DESTINATION ${INSTALL_PATH}/share/vvas/)
 
 install(DIRECTORY
@@ -79,6 +81,7 @@ install(DIRECTORY
     models/kv260/refinedet_pruned_0_96
     models/kv260/ssd_adas_pruned_0_95
     models/kv260/yolov3_coco_416_tf2
+    models/kv260/yolovx_pt
     DESTINATION ${INSTALL_PATH}/share/vitis_ai_library/models/)
 
 install(DIRECTORY
