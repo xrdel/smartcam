@@ -59,7 +59,7 @@ install(PROGRAMS
     script/04.file-ssd-dp.sh
     script/05.file-yolo-dp.sh
     script/smartcam-install.py
-    script/tl_and_stop.nv12
+    script/tl_and_stop.nv12.h264
     DESTINATION ${INSTALL_PATH}/bin)
 
 install(FILES
