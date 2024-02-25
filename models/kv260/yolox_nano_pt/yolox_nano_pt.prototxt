@@ -23,7 +23,7 @@ model {
       conf_threshold: 0.3
       nms_threshold: 0.65
       test_mAP: false 
-      Type: YOLOX_NANO
+      type: YOLOX_NANO
     }
   }
 }
