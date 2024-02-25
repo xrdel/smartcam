@@ -11,9 +11,9 @@
         "mean_r": 0,
         "mean_g": 0,
         "mean_b": 0,
-        "scale_r": 0.5,
-        "scale_g": 0.5,
-        "scale_b": 0.5
+        "scale_r": 0.25097984,
+        "scale_g": 0.25097984,
+        "scale_b": 0.25097984
       }
     }
   ]

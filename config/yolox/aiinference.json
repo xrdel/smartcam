@@ -6,7 +6,7 @@
    {
      "library-name":"libvvas_xdpuinfer.so",
      "config": {
-       "model-name" : "yolox_nano_pt",
+       "model-name" : "ofa_yolo_pt",
        "model-class" : "YOLOV3",
        "model-path" : "/opt/xilinx/kv260-smartcam/share/vitis_ai_library/models",
        "run_time_model" : false,
