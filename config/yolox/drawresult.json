@@ -15,27 +15,9 @@
             "label_filter" : [ "class", "probability" ],
             "classes" : [
                     {
-                    "name" : "stop sign",
+                    "name" : "pne",
                     "blue" : 255,
                     "green" : 0,
-                    "red" : 0
-                    },
-                    {
-                    "name" : "traffic light",
-                    "blue" : 0,
-                    "green" : 255,
-                    "red" : 0
-                    },
-                    {
-                    "name" : "car",
-                    "blue" : 0,
-                    "green" : 0,
-                    "red" : 255
-                    },
-                    {
-                    "name" : "person",
-                    "blue" : 128,
-                    "green" : 255,
                     "red" : 0
                     }]
           }

@@ -1,0 +1,231 @@
+{
+	"model-name": "tsd_yolox_pt",
+	"num-labels": 45,
+	"labels": [
+		{
+			"label": 0,
+			"name": "i2",
+			"display_name": "i2"
+		},
+		{
+			"label": 1,
+			"name": "i4",
+			"display_name": "i4"
+		},
+		{
+			"label": 2,
+			"name": "i5",
+			"display_name": "i5"
+		},
+		{
+			"label": 3,
+			"name": "il100",
+			"display_name": "il100"
+		},
+		{
+			"label": 4,
+			"name": "il60",
+			"display_name": "il60"
+		},
+		{
+			"label": 5,
+			"name": "il80",
+			"display_name": "il80"
+		},
+		{
+			"label": 6,
+			"name": "io",
+			"display_name": "io"
+		},
+		{
+			"label": 7,
+			"name": "ip",
+			"display_name": "ip"
+		},
+		{
+			"label": 8,
+			"name": "p10",
+			"display_name": "p10"
+		},
+		{
+			"label": 9,
+			"name": "p11",
+			"display_name": "p11"
+		},
+		{
+			"label": 10,
+			"name": "p12",
+			"display_name": "p12"
+		},
+		{
+			"label": 11,
+			"name": "p19",
+			"display_name": "p19"
+		},
+		{
+			"label": 12,
+			"name": "p23",
+			"display_name": "p23"
+		},
+		{
+			"label": 13,
+			"name": "p26",
+			"display_name": "p26"
+		},
+		{
+			"label": 14,
+			"name": "p27",
+			"display_name": "p27"
+		},
+		{
+			"label": 15,
+			"name": "p3",
+			"display_name": "p3"
+		},
+		{
+			"label": 16,
+			"name": "p5",
+			"display_name": "p5"
+		},
+		{
+			"label": 17,
+			"name": "p6",
+			"display_name": "p6"
+		},
+		{
+			"label": 18,
+			"name": "pg",
+			"display_name": "pg"
+		},
+		{
+			"label": 19,
+			"name": "ph4",
+			"display_name": "ph4"
+		},
+		{
+			"label": 20,
+			"name": "ph4.5",
+			"display_name": "ph4.5"
+		},
+		{
+			"label": 21,
+			"name": "ph5",
+			"display_name": "ph5"
+		},
+		{
+			"label": 22,
+			"name": "pl100",
+			"display_name": "pl100"
+		},
+		{
+			"label": 23,
+			"name": "pl120",
+			"display_name": "pl120"
+		},
+		{
+			"label": 24,
+			"name": "pl20",
+			"display_name": "pl20"
+		},
+		{
+			"label": 25,
+			"name": "pl30",
+			"display_name": "pl30"
+		},
+		{
+			"label": 26,
+			"name": "pl40",
+			"display_name": "pl40"
+		},
+		{
+			"label": 27,
+			"name": "pl5",
+			"display_name": "pl5"
+		},
+		{
+			"label": 28,
+			"name": "pl50",
+			"display_name": "pl50"
+		},
+		{
+			"label": 29,
+			"name": "pl60",
+			"display_name": "pl60"
+		},
+		{
+			"label": 30,
+			"name": "pl70",
+			"display_name": "pl70"
+		},
+		{
+			"label": 31,
+			"name": "pl80",
+			"display_name": "pl80"
+		},
+		{
+			"label": 32,
+			"name": "pm20",
+			"display_name": "pm20"
+		},
+		{
+			"label": 33,
+			"name": "pm30",
+			"display_name": "pm30"
+		},
+		{
+			"label": 34,
+			"name": "pm55",
+			"display_name": "pm55"
+		},
+		{
+			"label": 35,
+			"name": "pn",
+			"display_name": "pn"
+		},
+		{
+			"label": 36,
+			"name": "pne",
+			"display_name": "pne"
+		},
+		{
+			"label": 37,
+			"name": "po",
+			"display_name": "po"
+		},
+		{
+			"label": 38,
+			"name": "pr40",
+			"display_name": "pr40"
+		},
+		{
+			"label": 39,
+			"name": "w13",
+			"display_name": "w13"
+		},
+		{
+			"label": 40,
+			"name": "w32",
+			"display_name": "w32"
+		},
+		{
+			"label": 41,
+			"name": "w55",
+			"display_name": "w55"
+		},
+		{
+			"label": 42,
+			"name": "w57",
+			"display_name": "w57"
+		},
+		{
+			"label": 43,
+			"name": "w59",
+			"display_name": "w59"
+		},
+		{
+			"label": 44,
+			"name": "wo",
+			"display_name": "wo"
+		}
+	]
+}
