@@ -81,6 +81,7 @@ install(DIRECTORY
     models/kv260/refinedet_pruned_0_96
     models/kv260/ssd_adas_pruned_0_95
     models/kv260/yolov3_coco_416_tf2
+    models/kv260/tsd_yolox_pt
     models/kv260/ofa_yolo_pt
     models/kv260/yolox_nano_pt
     DESTINATION ${INSTALL_PATH}/share/vitis_ai_library/models/)
