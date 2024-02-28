@@ -58,7 +58,6 @@ install(PROGRAMS
     script/03.file-file.sh
     script/04.file-ssd-dp.sh
     script/smartcam-install.py
-    script/tl_and_stop.nv12.h264
     DESTINATION ${INSTALL_PATH}/bin)
 
 install(FILES
@@ -79,8 +78,8 @@ install(DIRECTORY
     models/kv260/densebox_640_360
     models/kv260/refinedet_pruned_0_96
     models/kv260/ssd_adas_pruned_0_95
-    models/kv260/yolov3_coco_416_tf2
     models/kv260/tsd_yolox_pt
+    models/kv260/yolov3_coco_416_tf2
     DESTINATION ${INSTALL_PATH}/share/vitis_ai_library/models/)
 
 install(DIRECTORY
@@ -100,3 +99,4 @@ set(CPACK_PACKAGING_INSTALL_PREFIX "/")
 set(CPACK_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}-${CPACK_PACKAGE_RELEASE}.${CMAKE_SYSTEM_PROCESSOR}")
 set(CPACK_RPM_SPEC_MORE_DEFINE "%define _build_id_links none")
 include(CPack)
+
