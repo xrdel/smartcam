@@ -3,402 +3,402 @@
 	"num-labels": 80,
 	"labels": [
 		{
-			"label": 1,
+			"label": 0,
 			"name": "person",
 			"display_name": "person"
 		},
 		{
-			"label": 2,
+			"label": 1,
 			"name": "bicycle",
 			"display_name": "bicycle"
 		},
 		{
-			"label": 3,
+			"label": 2,
 			"name": "car",
 			"display_name": "car"
 		},
 		{
+			"label": 3,
+			"name": "motorbike",
+			"display_name": "motorbike"
+		},
+		{
 			"label": 4,
-			"name": "motorcycle",
-			"display_name": "motorcycle"
+			"name": "aeroplane",
+			"display_name": "aeroplane"
 		},
 		{
 			"label": 5,
-			"name": "airplane",
-			"display_name": "airplane"
-		},
-		{
-			"label": 6,
 			"name": "bus",
 			"display_name": "bus"
 		},
 		{
-			"label": 7,
+			"label": 6,
 			"name": "train",
 			"display_name": "train"
 		},
 		{
-			"label": 8,
+			"label": 7,
 			"name": "truck",
 			"display_name": "truck"
 		},
 		{
-			"label": 9,
+			"label": 8,
 			"name": "boat",
 			"display_name": "boat"
 		},
 		{
-			"label": 10,
+			"label": 9,
 			"name": "traffic light",
 			"display_name": "traffic light"
 		},
 		{
-			"label": 11,
+			"label": 10,
 			"name": "fire hydrant",
 			"display_name": "fire hydrant"
 		},
 		{
-			"label": 13,
+			"label": 11,
 			"name": "stop sign",
 			"display_name": "stop sign"
 		},
 		{
-			"label": 14,
+			"label": 12,
 			"name": "parking meter",
 			"display_name": "parking meter"
 		},
 		{
-			"label": 15,
+			"label": 13,
 			"name": "bench",
 			"display_name": "bench"
 		},
 		{
-			"label": 16,
+			"label": 14,
 			"name": "bird",
 			"display_name": "bird"
 		},
 		{
-			"label": 17,
+			"label": 15,
 			"name": "cat",
 			"display_name": "cat"
 		},
 		{
-			"label": 18,
+			"label": 16,
 			"name": "dog",
 			"display_name": "dog"
 		},
 		{
-			"label": 19,
+			"label": 17,
 			"name": "horse",
 			"display_name": "horse"
 		},
 		{
-			"label": 20,
+			"label": 18,
 			"name": "sheep",
 			"display_name": "sheep"
 		},
 		{
-			"label": 21,
+			"label": 19,
 			"name": "cow",
 			"display_name": "cow"
 		},
 		{
-			"label": 22,
+			"label": 20,
 			"name": "elephant",
 			"display_name": "elephant"
 		},
 		{
-			"label": 23,
+			"label": 21,
 			"name": "bear",
 			"display_name": "bear"
 		},
 		{
-			"label": 24,
+			"label": 22,
 			"name": "zebra",
 			"display_name": "zebra"
 		},
 		{
-			"label": 25,
+			"label": 23,
 			"name": "giraffe",
 			"display_name": "giraffe"
 		},
 		{
-			"label": 27,
+			"label": 24,
 			"name": "backpack",
 			"display_name": "backpack"
 		},
 		{
-			"label": 28,
+			"label": 25,
 			"name": "umbrella",
 			"display_name": "umbrella"
 		},
 		{
-			"label": 31,
+			"label": 26,
 			"name": "handbag",
 			"display_name": "handbag"
 		},
 		{
-			"label": 32,
+			"label": 27,
 			"name": "tie",
 			"display_name": "tie"
 		},
 		{
-			"label": 33,
+			"label": 28,
 			"name": "suitcase",
 			"display_name": "suitcase"
 		},
 		{
-			"label": 34,
+			"label": 29,
 			"name": "frisbee",
 			"display_name": "frisbee"
 		},
 		{
-			"label": 35,
+			"label": 30,
 			"name": "skis",
 			"display_name": "skis"
 		},
 		{
-			"label": 36,
+			"label": 31,
 			"name": "snowboard",
 			"display_name": "snowboard"
 		},
 		{
-			"label": 37,
+			"label": 32,
 			"name": "sports ball",
 			"display_name": "sports ball"
 		},
 		{
-			"label": 38,
+			"label": 33,
 			"name": "kite",
 			"display_name": "kite"
 		},
 		{
-			"label": 39,
+			"label": 34,
 			"name": "baseball bat",
 			"display_name": "baseball bat"
 		},
 		{
-			"label": 40,
+			"label": 35,
 			"name": "baseball glove",
 			"display_name": "baseball glove"
 		},
 		{
-			"label": 41,
+			"label": 36,
 			"name": "skateboard",
 			"display_name": "skateboard"
 		},
 		{
-			"label": 42,
+			"label": 37,
 			"name": "surfboard",
 			"display_name": "surfboard"
 		},
 		{
-			"label": 43,
+			"label": 38,
 			"name": "tennis racket",
 			"display_name": "tennis racket"
 		},
 		{
-			"label": 44,
+			"label": 39,
 			"name": "bottle",
 			"display_name": "bottle"
 		},
 		{
-			"label": 46,
+			"label": 40,
 			"name": "wine glass",
 			"display_name": "wine glass"
 		},
 		{
-			"label": 47,
+			"label": 41,
 			"name": "cup",
 			"display_name": "cup"
 		},
 		{
-			"label": 48,
+			"label": 42,
 			"name": "fork",
 			"display_name": "fork"
 		},
 		{
-			"label": 49,
+			"label": 43,
 			"name": "knife",
 			"display_name": "knife"
 		},
 		{
-			"label": 50,
+			"label": 44,
 			"name": "spoon",
 			"display_name": "spoon"
 		},
 		{
-			"label": 51,
+			"label": 45,
 			"name": "bowl",
 			"display_name": "bowl"
 		},
 		{
-			"label": 52,
+			"label": 46,
 			"name": "banana",
 			"display_name": "banana"
 		},
 		{
-			"label": 53,
+			"label": 47,
 			"name": "apple",
 			"display_name": "apple"
 		},
 		{
-			"label": 54,
+			"label": 48,
 			"name": "sandwich",
 			"display_name": "sandwich"
 		},
 		{
-			"label": 55,
+			"label": 49,
 			"name": "orange",
 			"display_name": "orange"
 		},
 		{
-			"label": 56,
+			"label": 50,
 			"name": "broccoli",
 			"display_name": "broccoli"
 		},
 		{
-			"label": 57,
+			"label": 51,
 			"name": "carrot",
 			"display_name": "carrot"
 		},
 		{
-			"label": 58,
+			"label": 52,
 			"name": "hot dog",
 			"display_name": "hot dog"
 		},
 		{
-			"label": 59,
+			"label": 53,
 			"name": "pizza",
 			"display_name": "pizza"
 		},
 		{
-			"label": 60,
+			"label": 54,
 			"name": "donut",
 			"display_name": "donut"
 		},
 		{
-			"label": 61,
+			"label": 55,
 			"name": "cake",
 			"display_name": "cake"
 		},
 		{
-			"label": 62,
+			"label": 56,
 			"name": "chair",
 			"display_name": "chair"
 		},
 		{
-			"label": 63,
-			"name": "couch",
-			"display_name": "couch"
+			"label": 57,
+			"name": "sofa",
+			"display_name": "sofa"
 		},
 		{
-			"label": 64,
-			"name": "potted plant",
-			"display_name": "potted plant"
+			"label": 58,
+			"name": "pottedplant",
+			"display_name": "pottedplant"
 		},
 		{
-			"label": 65,
+			"label": 59,
 			"name": "bed",
 			"display_name": "bed"
 		},
 		{
-			"label": 67,
-			"name": "dining table",
-			"display_name": "dining table"
+			"label": 60,
+			"name": "diningtable",
+			"display_name": "diningtable"
 		},
 		{
-			"label": 70,
+			"label": 61,
 			"name": "toilet",
 			"display_name": "toilet"
 		},
 		{
-			"label": 72,
-			"name": "tv",
-			"display_name": "tv"
+			"label": 62,
+			"name": "tvmonitor",
+			"display_name": "tvmonitor"
 		},
 		{
-			"label": 73,
+			"label": 63,
 			"name": "laptop",
 			"display_name": "laptop"
 		},
 		{
-			"label": 74,
+			"label": 64,
 			"name": "mouse",
 			"display_name": "mouse"
 		},
 		{
-			"label": 75,
+			"label": 65,
 			"name": "remote",
 			"display_name": "remote"
 		},
 		{
-			"label": 76,
+			"label": 66,
 			"name": "keyboard",
 			"display_name": "keyboard"
 		},
 		{
-			"label": 77,
+			"label": 67,
 			"name": "cell phone",
 			"display_name": "cell phone"
 		},
 		{
-			"label": 78,
+			"label": 68,
 			"name": "microwave",
 			"display_name": "microwave"
 		},
 		{
-			"label": 79,
+			"label": 69,
 			"name": "oven",
 			"display_name": "oven"
 		},
 		{
-			"label": 80,
+			"label": 70,
 			"name": "toaster",
 			"display_name": "toaster"
 		},
 		{
-			"label": 81,
+			"label": 71,
 			"name": "sink",
 			"display_name": "sink"
 		},
 		{
-			"label": 82,
-			"name": "refrigexrator",
-			"display_name": "refrigexrator"
+			"label": 72,
+			"name": "refrigerator",
+			"display_name": "refrigerator"
 		},
 		{
-			"label": 84,
+			"label": 73,
 			"name": "book",
 			"display_name": "book"
 		},
 		{
-			"label": 85,
+			"label": 74,
 			"name": "clock",
 			"display_name": "clock"
 		},
 		{
-			"label": 86,
+			"label": 75,
 			"name": "vase",
 			"display_name": "vase"
 		},
 		{
-			"label": 87,
+			"label": 76,
 			"name": "scissors",
 			"display_name": "scissors"
 		},
 		{
-			"label": 88,
+			"label": 77,
 			"name": "teddy bear",
 			"display_name": "teddy bear"
 		},
 		{
-			"label": 89,
+			"label": 78,
 			"name": "hair drier",
 			"display_name": "hair drier"
 		},
 		{
-			"label": 90,
+			"label": 79,
 			"name": "toothbrush",
 			"display_name": "toothbrush"
 		}
