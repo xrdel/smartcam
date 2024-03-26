@@ -10,9 +10,10 @@ model {
   model_type : YOLOv3
   yolo_v3_param {
     num_classes: 80
-    anchorCnt: 2
-    layer_name: "59"
+    anchorCnt: 3
+    layer_name: "58"
     layer_name: "66"
+    layer_name: "74"
     conf_threshold: 0.3
     nms_threshold: 0.45
     biases: 10 
@@ -21,10 +22,6 @@ model {
     biases: 30
     biases: 33
     biases: 23
-    biases: 30
-    biases: 61
-    biases: 62
-    biases: 45
     biases: 59
     biases: 119
     biases: 116
