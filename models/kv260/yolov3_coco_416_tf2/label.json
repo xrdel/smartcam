@@ -396,6 +396,11 @@
 			"label": 78,
 			"name": "hair drier",
 			"display_name": "hair drier"
+		},
+		{
+			"label": 79,
+			"name": "toothbrush",
+			"display_name": "toothbrush"
 		}
 	]
 }
