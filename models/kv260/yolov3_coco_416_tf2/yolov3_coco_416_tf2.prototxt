@@ -9,7 +9,7 @@ model {
   }
   model_type : YOLOv3
   yolo_v3_param {
-    num_classes: 80
+    num_classes: 81
     anchorCnt: 3
     layer_name: "58"
     layer_name: "66"
