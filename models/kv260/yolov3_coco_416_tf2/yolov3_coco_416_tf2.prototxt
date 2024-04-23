@@ -10,9 +10,11 @@ model {
   model_type : YOLOv3
   yolo_v3_param {
     num_classes: 80
-    anchorCnt: 1
-    layer_name: "1"
-    conf_threshold: 0.8
+    anchorCnt: 3
+    layer_name: "58"
+    layer_name: "66"
+    layer_name: "74"
+    conf_threshold: 0.3
     nms_threshold: 0.45
     biases: 10 
     biases: 13

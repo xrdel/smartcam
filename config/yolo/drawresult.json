@@ -19,25 +19,13 @@
         "label_filter": [ "class", "probability" ],
         "classes": [
           {
-            "name": "car",
+            "name": "traffic light",
             "blue": 255,
             "green": 0,
             "red": 0
           },
           {
-            "name": "person",
-            "blue": 0,
-            "green": 255,
-            "red": 0
-          },
-          {
-            "name": "truck",
-            "blue": 128,
-            "green": 255,
-            "red": 0
-          },
-          {
-            "name": "bicycle",
+            "name": "stop sign",
             "blue": 0,
             "green": 0,
             "red": 255
