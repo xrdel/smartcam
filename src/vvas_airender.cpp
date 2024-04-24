@@ -259,8 +259,8 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
                     prediction->bbox.y - textsize.height), textsize),
             Scalar (clr.blue, clr.green, clr.red), FILLED, 1, 0);
 
-        /* Draw label text on the filled rectanngle */
-        putText (frameinfo->image, label_string,
+        /* Draw label text on the filled rectanngle label_string */
+        putText (frameinfo->image, 'TEST123445623456724365134513451345',
             cv::Point (prediction->bbox.x,
                 prediction->bbox.y + frameinfo->y_offset), kpriv->font,
             kpriv->font_size, Scalar (kpriv->label_color.blue,
