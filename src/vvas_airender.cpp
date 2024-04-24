@@ -237,8 +237,8 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
         putText (frameinfo->lumaImg, label_string, cv::Point (new_xmin,
                 new_ymin + frameinfo->y_offset), kpriv->font, kpriv->font_size,
             Scalar (yScalar), 1, 1);
-        putText (frameinfo->chromaImg, label_string, cv::Point (new_xmin / 2,
-                new_ymin / 2 + frameinfo->y_offset / 2), kpriv->font,
+        putText (frameinfo->chromaImg, label_string, cv::Point (new_xmin * 2,
+                new_ymin * 2 + frameinfo->y_offset / 2), kpriv->font,
             kpriv->font_size / 2, Scalar (uvScalar), 1, 1);
       }
     } else if (frameinfo->inframe->props.fmt == VVAS_VFMT_BGR8) {
@@ -263,13 +263,6 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
         putText (frameinfo->image, label_string,
             cv::Point (prediction->bbox.x,
                 prediction->bbox.y + frameinfo->y_offset), kpriv->font,
-            kpriv->font_size, Scalar (kpriv->label_color.blue,
-                kpriv->label_color.green, kpriv->label_color.red), 1, 1);
-				
-				
-        putText (frameinfo->image, label_string,
-            cv::Point (prediction->bbox.y,
-                prediction->bbox.x + frameinfo->y_offset), kpriv->font,
             kpriv->font_size, Scalar (kpriv->label_color.blue,
                 kpriv->label_color.green, kpriv->label_color.red), 1, 1);
       }
