@@ -246,8 +246,8 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 
       if (!(!prediction->bbox.x && !prediction->bbox.y)) {
         /* Draw rectangle over the dectected object */
-        rectangle (frameinfo->image, Point (prediction->bbox.x/2,
-              prediction->bbox.y/2),
+        rectangle (frameinfo->image, Point (prediction->bbox.x,
+              prediction->bbox.y),
           Point (prediction->bbox.width + prediction->bbox.x,
               prediction->bbox.height + prediction->bbox.y), Scalar (clr.blue,
               clr.green, clr.red), kpriv->line_thickness, 1, 0);
@@ -256,7 +256,7 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
       if (label_present) {
         /* Draw filled rectangle for label */
         rectangle (frameinfo->image, Rect (Point (prediction->bbox.x,
-                    prediction->bbox.y - textsize.height), textsize),
+                    prediction->bbox.y - textsize.height), textsize*4),
             Scalar (clr.blue, clr.green, clr.red), FILLED, 1, 0);
 
         /* Draw label text on the filled rectanngle */
