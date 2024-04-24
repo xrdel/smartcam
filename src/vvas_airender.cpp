@@ -237,8 +237,8 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
         putText (frameinfo->lumaImg, label_string, cv::Point (new_xmin,
                 new_ymin + frameinfo->y_offset), kpriv->font, kpriv->font_size,
             Scalar (yScalar), 1, 1);
-        putText (frameinfo->chromaImg, label_string, cv::Point (new_xmin * 2,
-                new_ymin * 2 + frameinfo->y_offset / 2), kpriv->font,
+        putText (frameinfo->chromaImg, label_string, cv::Point (new_xmin / 2,
+                new_ymin / 2 + frameinfo->y_offset / 2), kpriv->font,
             kpriv->font_size / 2, Scalar (uvScalar), 1, 1);
       }
     } else if (frameinfo->inframe->props.fmt == VVAS_VFMT_BGR8) {
@@ -246,8 +246,8 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 
       if (!(!prediction->bbox.x && !prediction->bbox.y)) {
         /* Draw rectangle over the dectected object */
-        rectangle (frameinfo->image, Point (prediction->bbox.x,
-              prediction->bbox.y),
+        rectangle (frameinfo->image, Point (prediction->bbox.x/2,
+              prediction->bbox.y/2),
           Point (prediction->bbox.width + prediction->bbox.x,
               prediction->bbox.height + prediction->bbox.y), Scalar (clr.blue,
               clr.green, clr.red), kpriv->line_thickness, 1, 0);
@@ -259,7 +259,7 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
                     prediction->bbox.y - textsize.height), textsize),
             Scalar (clr.blue, clr.green, clr.red), FILLED, 1, 0);
 
-        /* Draw label text on the filled rectangle */
+        /* Draw label text on the filled rectanngle */
         putText (frameinfo->image, label_string,
             cv::Point (prediction->bbox.x,
                 prediction->bbox.y + frameinfo->y_offset), kpriv->font,
