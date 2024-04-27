@@ -223,13 +223,16 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 
       if (label_present) {
         /* Draw filled rectangle for labelling, both on y and uv plane */
+		
+		/* ------HERE------*/
+		
         rectangle (frameinfo->lumaImg, Rect (Point (new_xmin,
-                    new_ymin - textsize.height), textsize*4),
+                    new_ymin - textsize.height), textsize),
             Scalar (yScalar), FILLED, 1, 0);
         textsize.height /= 2;
         textsize.width /= 2;
         rectangle (frameinfo->chromaImg, Rect (Point (new_xmin / 2,
-                    new_ymin / 2 - textsize.height), textsize*4),
+                    new_ymin / 2 - textsize.height), textsize),
             Scalar (uvScalar), FILLED, 1, 0);
 
         /* Draw label text on the filled rectanngle */
