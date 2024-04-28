@@ -170,6 +170,7 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
     }
 
     char label_string[MAX_LABEL_LEN];
+	char new_label_string[MAX_LABEL_LEN]=idx;
     bool label_present;
     Size textsize;
     label_present = get_label_text (classification, kpriv, label_string);
@@ -226,9 +227,9 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 		
 		/* ------HERE------*/
 		
-        /*rectangle (frameinfo->lumaImg, Rect (Point (new_xmin,
+        rectangle (frameinfo->lumaImg, Rect (Point (new_xmin,
                     new_ymin - textsize.height), textsize),
-            Scalar (yScalar), FILLED, 1, 0);*/
+            Scalar (yScalar), FILLED, 1, 0);
         textsize.height /= 2;
         textsize.width /= 2;
         rectangle (frameinfo->chromaImg, Rect (Point (new_xmin / 2,
