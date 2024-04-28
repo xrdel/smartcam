@@ -170,8 +170,9 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
     }
 
     char label_string[MAX_LABEL_LEN];
-	char new_label_string[MAX_LABEL_LEN]=idx;
+	char new_label_string[MAX_LABEL_LEN];
     bool label_present;
+	std::sprintf(new_label_string, "%d", idx);
     Size textsize;
     label_present = get_label_text (classification, kpriv, label_string);
 
