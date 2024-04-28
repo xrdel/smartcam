@@ -239,10 +239,10 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 
         /* Draw label text on the filled rectanngle */
         convert_rgb_to_yuv_clrs (kpriv->label_color, &yScalar, &uvScalar);
-        putText (frameinfo->lumaImg, label_string, cv::Point (new_xmin,
+        putText (frameinfo->lumaImg, new_label_string, cv::Point (new_xmin,
                 new_ymin + frameinfo->y_offset), kpriv->font, kpriv->font_size,
             Scalar (yScalar), 1, 1);
-        putText (frameinfo->chromaImg, label_string, cv::Point (new_xmin / 2,
+        putText (frameinfo->chromaImg, new_label_string, cv::Point (new_xmin / 2,
                 new_ymin / 2 + frameinfo->y_offset / 2), kpriv->font,
             kpriv->font_size / 2, Scalar (uvScalar), 1, 1);
       }
