@@ -172,7 +172,6 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
     char label_string[MAX_LABEL_LEN];
 	char new_label_string[MAX_LABEL_LEN];
     bool label_present;
-	std::sprintf(new_label_string, "%d", kpriv->classes_count);
     Size textsize;
     label_present = get_label_text (classification, kpriv, label_string);
 
@@ -227,6 +226,8 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
         /* Draw filled rectangle for labelling, both on y and uv plane */
 		
 		/* ------HERE------*/
+		
+		std::sprintf(new_label_string, "%d", yScalar[0]);
 		
         rectangle (frameinfo->lumaImg, Rect (Point (new_xmin,
                     new_ymin - textsize.height), textsize),
