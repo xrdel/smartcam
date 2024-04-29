@@ -227,7 +227,7 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 		
 		/* ------HERE------*/
 		
-		std::sprintf(new_label_string, "%d", yScalar[0]);
+		std::sprintf(new_label_string, "%u", yScalar);
 		
         rectangle (frameinfo->lumaImg, Rect (Point (new_xmin,
                     new_ymin - textsize.height), textsize),
