@@ -172,7 +172,7 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
     char label_string[MAX_LABEL_LEN];
 	char new_label_string[MAX_LABEL_LEN];
     bool label_present;
-	std::sprintf(new_label_string, "%d", idx);
+	std::sprintf(new_label_string, "%d", kpriv->classes_count);
     Size textsize;
     label_present = get_label_text (classification, kpriv, label_string);
 
@@ -215,7 +215,7 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
       Size test_rect (new_xmax - new_xmin, new_ymax - new_ymin);
 
       if (!(!prediction->bbox.x && !prediction->bbox.y)) {
-        rectangle (frameinfo->lumaImg, Point (new_xmin,
+        rectangle (frameinfo->lumzaImg, Point (new_xmin,
               new_ymin), Point (new_xmax,
               new_ymax), Scalar (yScalar), kpriv->line_thickness, 1, 0);
         rectangle (frameinfo->chromaImg, Point (new_xmin / 2,
