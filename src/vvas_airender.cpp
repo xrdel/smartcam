@@ -232,7 +232,7 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 		} else if (idx == 0) {
 			std::sprintf(new_label_string, "Y = %d, %d and X = %d, %d", new_ymin, new_ymax-new_ymin, new_xmin, new_xmax-new_xmin);
 		} else {
-			new_label_string = label_string;
+			std::copy(new_label_string, new_label_string + 5, label_string);
 		}
 		
         rectangle (frameinfo->lumaImg, Rect (Point (new_xmin,
