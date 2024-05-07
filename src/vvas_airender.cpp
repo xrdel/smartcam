@@ -215,12 +215,12 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 	   
 	  /* ------HERE------*/
       if (!(!prediction->bbox.x && !prediction->bbox.y)) {
-        /*rectangle (frameinfo->lumaImg, Point (new_xmin,
+        rectangle (frameinfo->lumaImg, Point (new_xmin,
               new_ymin), Point (new_xmax,
-              new_ymax), Scalar (yScalar), kpriv->line_thickness, 1, 0);*/
-        rectangle (frameinfo->chromaImg, Point (new_xmin / 2,
+              new_ymax), Scalar (yScalar), kpriv->line_thickness, 1, 0);
+        /*rectangle (frameinfo->chromaImg, Point (new_xmin / 2,
               new_ymin / 2), Point (new_xmax / 2,
-              new_ymax / 2), Scalar (uvScalar), kpriv->line_thickness, 1, 0);
+              new_ymax / 2), Scalar (uvScalar), kpriv->line_thickness, 1, 0)*/;
       }
 
       if (label_present) {
