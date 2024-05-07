@@ -218,17 +218,22 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
         rectangle (frameinfo->lumaImg, Point (new_xmin,
               new_ymin), Point (new_xmax,
               new_ymax), Scalar (yScalar), kpriv->line_thickness, 1, 0);
-        /*rectangle (frameinfo->chromaImg, Point (new_xmin / 2,
+        rectangle (frameinfo->chromaImg, Point (new_xmin / 2,
               new_ymin / 2), Point (new_xmax / 2,
-              new_ymax / 2), Scalar (uvScalar), kpriv->line_thickness, 1, 0)*/;
+              new_ymax / 2), Scalar (uvScalar), kpriv->line_thickness, 1, 0);
       }
 
       if (label_present) {
         /* Draw filled rectangle for labelling, both on y and uv plane */
 		
 		/* ------HERE------*/
-		
-		std::sprintf(new_label_string, "%u", uvScalar);
+		if (idx == 1) {
+			std::sprintf(new_label_string, "Dy = %d and Dx = %d", new_ymax-new_ymin, new_xmax-new_xmin);
+		} else if (idx == 0) {
+			std::sprintf(new_label_string, "Y - %d and X = %d", new_ymax-new_ymin, new_xmax-new_xmin)
+		} else {
+			std::sprintf(new_label_string, "%u", label_string)
+		}
 		
         rectangle (frameinfo->lumaImg, Rect (Point (new_xmin,
                     new_ymin - textsize.height), textsize),
