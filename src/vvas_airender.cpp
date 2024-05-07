@@ -230,9 +230,9 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 		if (idx == 1) {
 			std::sprintf(new_label_string, "Dy = %d and Dx = %d", new_ymax-new_ymin, new_xmax-new_xmin);
 		} else if (idx == 0) {
-			std::sprintf(new_label_string, "Y - %d and X = %d", new_ymax-new_ymin, new_xmax-new_xmin)
+			std::sprintf(new_label_string, "Y - %d and X = %d", new_ymax-new_ymin, new_xmax-new_xmin);
 		} else {
-			std::sprintf(new_label_string, "%u", label_string)
+			std::sprintf(new_label_string, "%u", label_string);
 		}
 		
         rectangle (frameinfo->lumaImg, Rect (Point (new_xmin,
