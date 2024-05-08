@@ -233,7 +233,7 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 		if (idx == 1) {
 			//This is idx for Stop Sign
 			//std::sprintf(new_label_string, "Dy = %d and Dx = %d", new_ymax-new_ymin, new_xmax-new_xmin);
-			stop_dist = ceil(200/(new_ymax-new_ymin));
+			stop_dist = ceil(5*200/(new_ymax-new_ymin));
 			std::sprintf(new_label_string, "IN < %d m", new_ymax-new_ymin);
 			rectangle (frameinfo->lumaImg, Rect (Point (1000,
 						1000 - textsize.height), textsize),
@@ -254,11 +254,28 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 				kpriv->font_size / 2, Scalar (uvScalar), 1, 1);
 		} else if (idx == 0) {
 			std::sprintf(new_label_string, "Y = %d, %d and X = %d, %d", new_ymin, new_ymax-new_ymin, new_xmin, new_xmax-new_xmin);
+			rectangle (frameinfo->lumaImg, Rect (Point (new_xmin,
+						new_ymin - textsize.height), textsize),
+				Scalar (yScalar), FILLED, 1, 0);
+			textsize.height /= 2;
+			textsize.width /= 2;
+			rectangle (frameinfo->chromaImg, Rect (Point (new_xmin / 2,
+						new_ymin / 2 - textsize.height), textsize),
+				Scalar (uvScalar), FILLED, 1, 0);
+
+			/* Draw label text on the filled rectanngle */
+			convert_rgb_to_yuv_clrs (kpriv->label_color, &yScalar, &uvScalar);
+			putText (frameinfo->lumaImg, new_label_string, cv::Point (new_xmin,
+					new_ymin + frameinfo->y_offset), kpriv->font, kpriv->font_size,
+				Scalar (yScalar), 1, 1);
+			putText (frameinfo->chromaImg, new_label_string, cv::Point (new_xmin / 2,
+					new_ymin / 2 + frameinfo->y_offset / 2), kpriv->font,
+				kpriv->font_size / 2, Scalar (uvScalar), 1, 1);
 		} else {
 			std::copy(new_label_string, new_label_string + 5, label_string);
 		}
 		
-        rectangle (frameinfo->lumaImg, Rect (Point (new_xmin,
+        /*rectangle (frameinfo->lumaImg, Rect (Point (new_xmin,
                     new_ymin - textsize.height), textsize),
             Scalar (yScalar), FILLED, 1, 0);
         textsize.height /= 2;
@@ -267,14 +284,14 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
                     new_ymin / 2 - textsize.height), textsize),
             Scalar (uvScalar), FILLED, 1, 0);
 
-        /* Draw label text on the filled rectanngle */
+        // Draw label text on the filled rectanngle 
         convert_rgb_to_yuv_clrs (kpriv->label_color, &yScalar, &uvScalar);
         putText (frameinfo->lumaImg, new_label_string, cv::Point (new_xmin,
                 new_ymin + frameinfo->y_offset), kpriv->font, kpriv->font_size,
             Scalar (yScalar), 1, 1);
         putText (frameinfo->chromaImg, new_label_string, cv::Point (new_xmin / 2,
                 new_ymin / 2 + frameinfo->y_offset / 2), kpriv->font,
-            kpriv->font_size / 2, Scalar (uvScalar), 1, 1);
+            kpriv->font_size / 2, Scalar (uvScalar), 1, 1);*/
       }
     } else if (frameinfo->inframe->props.fmt == VVAS_VFMT_BGR8) {
       LOG_MESSAGE (LOG_LEVEL_DEBUG, "Drawing rectangle for BGR image");
