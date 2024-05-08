@@ -211,6 +211,9 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
           floor ((prediction->bbox.width + prediction->bbox.x) / 2) * 2;
       int new_ymax =
           floor ((prediction->bbox.height + prediction->bbox.y) / 2) * 2;
+	  //CHRISTOS
+	  int stop_dist
+	  
       Size test_rect (new_xmax - new_xmin, new_ymax - new_ymin);
 	   
 	  /* ------HERE------*/
@@ -228,7 +231,18 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 		
 		/* ------HERE------*/
 		if (idx == 1) {
-			std::sprintf(new_label_string, "Dy = %d and Dx = %d", new_ymax-new_ymin, new_xmax-new_xmin);
+			//This is idx for Stop Sign
+			//std::sprintf(new_label_string, "Dy = %d and Dx = %d", new_ymax-new_ymin, new_xmax-new_xmin);
+			stop_dist = ceil(200/(new_ymax-new_ymin))
+			std::sprintf(new_label_string, "IN < %d m", stop_dist);
+			rectangle (frameinfo->lumaImg, Rect (Point (1000,
+						1000 - textsize.height), textsize),
+				Scalar (yScalar), FILLED, 1, 0);
+			textsize.height /= 2;
+			textsize.width /= 2;
+			rectangle (frameinfo->chromaImg, Rect (Point (1000 / 2,
+						1000 / 2 - textsize.height), textsize),
+				Scalar (uvScalar), FILLED, 1, 0);
 		} else if (idx == 0) {
 			std::sprintf(new_label_string, "Y = %d, %d and X = %d, %d", new_ymin, new_ymax-new_ymin, new_xmin, new_xmax-new_xmin);
 		} else {
