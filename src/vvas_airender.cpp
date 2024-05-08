@@ -234,7 +234,7 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 			//This is idx for Stop Sign
 			//std::sprintf(new_label_string, "Dy = %d and Dx = %d", new_ymax-new_ymin, new_xmax-new_xmin);
 			stop_dist = ceil(200/(new_ymax-new_ymin));
-			std::sprintf(new_label_string, "IN < %d m", stop_dist);
+			std::sprintf(new_label_string, "IN < %d m", new_ymax-new_ymin);
 			rectangle (frameinfo->lumaImg, Rect (Point (1000,
 						1000 - textsize.height), textsize),
 				Scalar (yScalar), FILLED, 1, 0);
@@ -243,6 +243,15 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 			rectangle (frameinfo->chromaImg, Rect (Point (1000 / 2,
 						1000 / 2 - textsize.height), textsize),
 				Scalar (uvScalar), FILLED, 1, 0);
+				
+			/* Draw label text on the filled rectanngle */
+			convert_rgb_to_yuv_clrs (kpriv->label_color, &yScalar, &uvScalar);
+			putText (frameinfo->lumaImg, new_label_string, cv::Point (1000,
+					1000 + frameinfo->y_offset), kpriv->font, kpriv->font_size,
+				Scalar (yScalar), 1, 1);
+			putText (frameinfo->chromaImg, new_label_string, cv::Point (1000 / 2,
+					1000 / 2 + frameinfo->y_offset / 2), kpriv->font,
+				kpriv->font_size / 2, Scalar (uvScalar), 1, 1);
 		} else if (idx == 0) {
 			std::sprintf(new_label_string, "Y = %d, %d and X = %d, %d", new_ymin, new_ymax-new_ymin, new_xmin, new_xmax-new_xmin);
 		} else {
