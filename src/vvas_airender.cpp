@@ -227,9 +227,14 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
       }
 
       if (label_present) {
+		/* ------HERE------ */
         /* Draw filled rectangle for labelling, both on y and uv plane */
 		
-		/* ------HERE------*/
+		Rect myROI(new_xmin, new_ymin, new_xmax, new_ymax);
+		Mat cropped_lumaImg=frameinfo->lumaImg(myROI);
+		Mat cropped_chromaImg=frameinfo->chromaImg(myROI);
+		
+		
 		if (idx == 1) {
 			//This is idx for Stop Sign
 			//std::sprintf(new_label_string, "Dy = %d and Dx = %d", new_ymax-new_ymin, new_xmax-new_xmin);
@@ -253,7 +258,8 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 					1000 / 2 + frameinfo->y_offset / 2), kpriv->font,
 				kpriv->font_size / 2, Scalar (uvScalar), 1, 1);
 		} else if (idx == 0) {
-			std::sprintf(new_label_string, "Y = %d, %d and X = %d, %d", new_ymin, new_ymax-new_ymin, new_xmin, new_xmax-new_xmin);
+			std::sprintf(new_label_string, "luma = %u chroma = %u", frameinfo->lumaImg(new_xmin, new_ymin), frameinfo->chromaImg(new_xmax, new_ymax));
+			//std::sprintf(new_label_string, "Y = %d, %d and X = %d, %d", new_ymin, new_ymax-new_ymin, new_xmin, new_xmax-new_xmin);
 			rectangle (frameinfo->lumaImg, Rect (Point (new_xmin,
 						new_ymin - textsize.height), textsize),
 				Scalar (yScalar), FILLED, 1, 0);
