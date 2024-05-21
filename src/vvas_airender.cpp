@@ -227,7 +227,7 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
       }
 
       // ANDREAS
-      char debug_info[10000];
+      char debug_info[MAX_LABEL_LEN];
       // std::sprintf(
       //   debug_info,
       //   "L%dx%d(%d),C%dx%d(%d),I420%dx%d(%d)",
@@ -247,11 +247,11 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
         frameinfo->chromaImg.rows,
         frameinfo->chromaImg.cols
       );
-      putText (frameinfo->lumaImg, debug_info, cv::Point (1000,
-					1000 + frameinfo->y_offset), kpriv->font, kpriv->font_size,
+      putText (frameinfo->lumaImg, debug_info, cv::Point (0,
+					0 + frameinfo->y_offset), kpriv->font, kpriv->font_size,
 				Scalar (yScalar), 1, 1);
-			putText (frameinfo->chromaImg, debug_info, cv::Point (1000 / 2,
-					1000 / 2 + frameinfo->y_offset / 2), kpriv->font,
+			putText (frameinfo->chromaImg, debug_info, cv::Point (0 / 2,
+					0 / 2 + frameinfo->y_offset / 2), kpriv->font,
 				kpriv->font_size / 2, Scalar (uvScalar), 1, 1);
 
       if (label_present) {
