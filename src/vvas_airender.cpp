@@ -244,8 +244,8 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
       std::sprintf(
         debug_info,
         "C%dx%d",
-        frameinfo->chromaImg.rows,
-        frameinfo->chromaImg.cols
+        frameinfo->I420image.rows,
+        frameinfo->I420image.cols
       );
       putText (frameinfo->lumaImg, debug_info, cv::Point (0,
 					0 + frameinfo->y_offset), kpriv->font, kpriv->font_size,
