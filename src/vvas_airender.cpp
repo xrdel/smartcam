@@ -226,6 +226,34 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
               new_ymax / 2), Scalar (uvScalar), kpriv->line_thickness, 1, 0);
       }
 
+      // ANDREAS
+      char debug_info[10000];
+      // std::sprintf(
+      //   debug_info,
+      //   "L%dx%d(%d),C%dx%d(%d),I420%dx%d(%d)",
+        // frameinfo->lumaImg.rows,
+        // frameinfo->lumaImg.cols,
+        // frameinfo->lumaImg[0],
+        // frameinfo->chromaImg.rows,
+        // frameinfo->chromaImg.cols,
+        // frameinfo->chromaImg[0],
+        // frameinfo->I420image.rows
+        // frameinfo->I420image.cols,
+        // frameinfo->I420image[0],
+      // );
+      std::sprintf(
+        debug_info,
+        "I420%dx%d",
+        frameinfo->I420image.rows
+        frameinfo->I420image.cols,
+      );
+      putText (frameinfo->lumaImg, debug_info, cv::Point (1000,
+					1000 + frameinfo->y_offset), kpriv->font, kpriv->font_size,
+				Scalar (yScalar), 1, 1);
+			putText (frameinfo->chromaImg, debug_info, cv::Point (1000 / 2,
+					1000 / 2 + frameinfo->y_offset / 2), kpriv->font,
+				kpriv->font_size / 2, Scalar (uvScalar), 1, 1);
+
       if (label_present) {
 		/* ------HERE------ */
         /* Draw filled rectangle for labelling, both on y and uv plane */
@@ -258,7 +286,6 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 					1000 / 2 + frameinfo->y_offset / 2), kpriv->font,
 				kpriv->font_size / 2, Scalar (uvScalar), 1, 1);
 		} else if (idx == 0) {
-			std::sprintf(new_label_string, "luma = %u chroma = %u", frameinfo->lumaImg(new_xmin, new_ymin), frameinfo->chromaImg(new_xmax, new_ymax));
 			//std::sprintf(new_label_string, "Y = %d, %d and X = %d, %d", new_ymin, new_ymax-new_ymin, new_xmin, new_xmax-new_xmin);
 			rectangle (frameinfo->lumaImg, Rect (Point (new_xmin,
 						new_ymin - textsize.height), textsize),
