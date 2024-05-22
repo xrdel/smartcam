@@ -247,11 +247,11 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
         frameinfo->I420image.rows,
         frameinfo->I420image.cols
       );
-      putText (frameinfo->lumaImg, debug_info, cv::Point (0,
-					0 + frameinfo->y_offset), kpriv->font, kpriv->font_size,
+      putText (frameinfo->lumaImg, debug_info, cv::Point (200,
+					200 + frameinfo->y_offset), kpriv->font, kpriv->font_size,
 				Scalar (yScalar), 1, 1);
-			putText (frameinfo->chromaImg, debug_info, cv::Point (0 / 2,
-					0 / 2 + frameinfo->y_offset / 2), kpriv->font,
+			putText (frameinfo->chromaImg, debug_info, cv::Point (200 / 2,
+					200 / 2 + frameinfo->y_offset / 2), kpriv->font,
 				kpriv->font_size / 2, Scalar (uvScalar), 1, 1);
 
       if (label_present) {
