@@ -259,7 +259,7 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
         /* Draw filled rectangle for labelling, both on y and uv plane */
 		
 		Rect myROI(new_xmin, new_ymin, new_xmax, new_ymax);
-		Rect myROI(new_xmin/2, new_ymin/2, new_xmax/2, new_ymax/2);		
+		Rect myROI_2(new_xmin/2, new_ymin/2, new_xmax/2, new_ymax/2);		
 		Mat cropped_lumaImg=frameinfo->lumaImg(myROI);
 		Mat cropped_chromaImg=frameinfo->chromaImg(myROI_2);
 		
