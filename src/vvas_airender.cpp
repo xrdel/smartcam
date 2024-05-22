@@ -241,12 +241,7 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
         // frameinfo->I420image.cols,
         // frameinfo->I420image[0],
       // );
-      std::sprintf(
-        debug_info,
-        "C%dx%d",
-        frameinfo->I420image.rows,
-        frameinfo->I420image.cols
-      );
+      std::sprintf(debug_info, "C%dx%d", frameinfo->I420image.rows, frameinfo->I420image.cols);
       putText (frameinfo->lumaImg, debug_info, cv::Point (200,
 					200 + frameinfo->y_offset), kpriv->font, kpriv->font_size,
 				Scalar (yScalar), 1, 1);
@@ -266,7 +261,8 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 		
 		if (idx == 1) {
 			//This is idx for Stop Sign
-			std::sprintf(new_label_string, "Dy = %d and Dx = %d", new_ymax-new_ymin, new_xmax-new_xmin);
+			//std::sprintf(new_label_string, "Dy = %d and Dx = %d", new_ymax-new_ymin, new_xmax-new_xmin);
+			std::sprintf(new_label_string, "C%dx%d", frameinfo->I420image.rows, frameinfo->I420image.cols);
 			stop_dist = ceil(5*200/(new_ymax-new_ymin));
 			std::sprintf(new_label_string, "IN < %d m", stop_dist);
 			rectangle (frameinfo->lumaImg, Rect (Point (1000,
