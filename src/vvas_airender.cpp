@@ -271,7 +271,7 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 
 		// Convert YUV to BGR
 		Mat bgr_img;
-		cvtColor(yuv_img, bgr_img, cv::COLOR_YUV2BGR_NV12);
+		cvtColor(yuv_img, bgr_img, cv::COLOR_YUV2BGR_I420);
 		
 		std::vector<cv::Mat> bgr_channels;
 		cv::split(bgr_img, bgr_channels);
@@ -319,7 +319,7 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 					1000 / 2 + frameinfo->y_offset / 2), kpriv->font,
 				kpriv->font_size / 2, Scalar (uvScalar), 1, 1);
 		} else if (idx == 0) {
-			std::sprintf(new_label_string, "Blue: %f Green:  %f Red: %f", blue_sum[0], green_sum[0], red_sum[0]);
+			std::sprintf(new_label_string, "B: %.1f G:  %.1f R: %.1f", blue_sum[0], green_sum[0], red_sum[0]);
 			rectangle (frameinfo->lumaImg, Rect (Point (new_xmin,
 						new_ymin - textsize.height), textsize),
 				Scalar (yScalar), FILLED, 1, 0);
