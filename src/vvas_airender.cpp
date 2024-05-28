@@ -266,15 +266,15 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 		
 		// Create a YUV image
 		Mat yuv_img(height_luma + height_luma / 2, width_luma, CV_8UC1);
-		memcpy(yuv_img.data, luma.data, width_luma * height_luma);
-		memcpy(yuv_img.data + width_luma * height_luma, chroma.data, width_luma * height_luma / 2);
+		memcpy(yuv_img.data, frameinfo->lumaImg.data, width_luma * height_luma);
+		memcpy(yuv_img.data + width_luma * height_luma, frameinfo->chromaImg.data, width_luma * height_luma / 2);
 
 		// Convert YUV to BGR
 		Mat bgr_img;
 		cvtColor(yuv_img, bgr_img, cv::COLOR_YUV2BGR_NV12);
 		
 		std::vector<cv::Mat> bgr_channels;
-		cv::split(img, bgr_channels);
+		cv::split(bgr_img, bgr_channels);
 
 		Scalar blue_sum = cv::mean(bgr_channels[0]);
 		Scalar green_sum = cv::mean(bgr_channels[1]);
@@ -319,7 +319,7 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 					1000 / 2 + frameinfo->y_offset / 2), kpriv->font,
 				kpriv->font_size / 2, Scalar (uvScalar), 1, 1);
 		} else if (idx == 0) {
-			std::sprintf(new_label_string, "Blue: %d Green:  %d Red: %d", blue_sum[0], green_sum[0], red_sum[0]);
+			std::sprintf(new_label_string, "Blue: %f Green:  %f Red: %f", blue_sum[0], green_sum[0], red_sum[0]);
 			rectangle (frameinfo->lumaImg, Rect (Point (new_xmin,
 						new_ymin - textsize.height), textsize),
 				Scalar (yScalar), FILLED, 1, 0);
