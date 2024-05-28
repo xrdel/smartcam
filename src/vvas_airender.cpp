@@ -225,7 +225,8 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
               new_ymin / 2), Point (new_xmax / 2,
               new_ymax / 2), Scalar (uvScalar), kpriv->line_thickness, 1, 0);
       }
-
+	  
+	  /*
       // ANDREAS
       char debug_info[MAX_LABEL_LEN];
       // std::sprintf(
@@ -248,7 +249,8 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 			putText (frameinfo->chromaImg, debug_info, cv::Point (200 / 2,
 					200 / 2 + frameinfo->y_offset / 2), kpriv->font,
 				kpriv->font_size / 2, Scalar (uvScalar), 1, 1);
-
+	  */
+	  
       if (label_present) {
 		/* ------HERE------ */
         /* Draw filled rectangle for labelling, both on y and uv plane */
@@ -259,6 +261,40 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 		Mat cropped_chromaImg=frameinfo->chromaImg(myROI_2);
 		*/
 		
+		int width_luma = frameinfo->lumaImg.cols;
+		int height_luma = frameinfo->lumaImg.rows;
+		
+		// Create a YUV image
+		Mat yuv_img(height_luma + height_luma / 2, width_luma, CV_8UC1);
+		memcpy(yuv_img.data, luma.data, width_luma * height_luma);
+		memcpy(yuv_img.data + width_luma * height_luma, chroma.data, width_luma * height_luma / 2);
+
+		// Convert YUV to BGR
+		Mat bgr_img;
+		cvtColor(yuv_img, bgr_img, cv::COLOR_YUV2BGR_NV12);
+		
+		std::vector<cv::Mat> bgr_channels;
+		cv::split(img, bgr_channels);
+
+		Scalar blue_sum = cv::mean(bgr_channels[0]);
+		Scalar green_sum = cv::mean(bgr_channels[1]);
+		Scalar red_sum = cv::mean(bgr_channels[2]);
+/*	
+    // Create a single NV12 image
+    cv::Mat nv12Img(height + height / 2, stride, CV_8UC1);
+
+    // Copy luma to NV12 image
+    frameinfo->lumaImg.copyTo(nv12Img(cv::Rect(0, 0, stride, height)));
+
+    // Copy chroma to NV12 image (need to reshape chroma data)
+    cv::Mat chromaReshaped(height / 2, stride, CV_8UC1, chromaBuf);
+    chromaReshaped.copyTo(nv12Img(cv::Rect(0, height, stride, height / 2)));
+
+    // Convert NV12 to BGR
+    cv::Mat bgrImg;
+    cv::cvtColor(nv12Img, bgrImg, cv::COLOR_YUV2BGR_NV12);
+	*/
+
 		if (idx == 1) {
 			//This is idx for Stop Sign
 			//std::sprintf(new_label_string, "Dy = %d and Dx = %d", new_ymax-new_ymin, new_xmax-new_xmin);
@@ -283,7 +319,7 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 					1000 / 2 + frameinfo->y_offset / 2), kpriv->font,
 				kpriv->font_size / 2, Scalar (uvScalar), 1, 1);
 		} else if (idx == 0) {
-			std::sprintf(new_label_string, "Y = %d, %d and X = %d, %d", new_ymin, new_ymax-new_ymin, new_xmin, new_xmax-new_xmin);
+			std::sprintf(new_label_string, "Blue: %d Green:  %d Red: %d", blue_sum[0], green_sum[0], red_sum[0]);
 			rectangle (frameinfo->lumaImg, Rect (Point (new_xmin,
 						new_ymin - textsize.height), textsize),
 				Scalar (yScalar), FILLED, 1, 0);
