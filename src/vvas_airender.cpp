@@ -260,10 +260,45 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 		Mat cropped_lumaImg=frameinfo->lumaImg(myROI);
 		Mat cropped_chromaImg=frameinfo->chromaImg(myROI_2);
 		*/
+
+		Mat u_plane, v_plane;
+
+		int chroma_height = frameinfo->chromaImg.rows;
+		int chroma_width = frameinfo->chromaImg.cols;
+		int luma_height = frameinfo->lumaImg.rows;
+		int luma_width = frameinfo->lumaImg.cols;
+
+		// Initialize U and V planes with half the resolution of the luma plane
+		u_plane.create(chroma_height, chroma_width, CV_8UC1);
+		v_plane.create(chroma_height, chroma_width, CV_8UC1);
+
+		for (int i = 0; i < chroma_height; ++i) {
+			for (int j = 0; j < chroma_width; ++j) {
+				uint16_t uv_value = frameinfo->chromaImg.at<uint16_t>(i, j);
+				u_plane.at<uchar>(i, j) = uv_value & 0xFF; // Extract lower 8 bits for U
+				v_plane.at<uchar>(i, j) = (uv_value >> 8) & 0xFF; // Extract upper 8 bits for V
+			}
+		}
+		Mat yuv_img(luma_height + luma_height / 2, luma_width, CV_8UC1);
+		memcpy(yuv_img.data, luma.data, luma_width * luma_height);
+    
+		uchar* uv_ptr = yuv_img.data + luma_width * luma_height;
+		for (int i = 0; i < luma_height / 2; ++i) {
+			for (int j = 0; j < luma_width / 2; ++j) {
+				uv_ptr[i * luma_width + 2 * j] = u_plane.at<uchar>(i, j);
+				uv_ptr[i * luma_width + 2 * j + 1] = v_plane.at<uchar>(i, j);
+			}
+		}
 		
+		Mat bgr_img;
+		cvtColor(yuv_img, bgr_img, COLOR_YUV2BGR_NV12);
+		
+		
+		
+/*			
 		int width_luma = frameinfo->lumaImg.cols;
 		int height_luma = frameinfo->lumaImg.rows;
-		
+	
 		// Create a YUV image
 		Mat yuv_img(height_luma + height_luma / 2, width_luma, CV_8UC1);
 		memcpy(yuv_img.data, frameinfo->lumaImg.data, width_luma * height_luma);
@@ -279,6 +314,7 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 		Scalar blue_sum = cv::mean(bgr_channels[0]);
 		Scalar green_sum = cv::mean(bgr_channels[1]);
 		Scalar red_sum = cv::mean(bgr_channels[2]);
+*/
 /*	
     // Create a single NV12 image
     cv::Mat nv12Img(height + height / 2, stride, CV_8UC1);
@@ -319,7 +355,18 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 					1000 / 2 + frameinfo->y_offset / 2), kpriv->font,
 				kpriv->font_size / 2, Scalar (uvScalar), 1, 1);
 		} else if (idx == 0) {
-			std::sprintf(new_label_string, "B: %.1f G:  %.1f R: %.1f", blue_sum[0], green_sum[0], red_sum[0]);
+			// Define the region of interest (ROI)
+			Rect roi(new_xmin, new_ymin, new_xmax, new_ymax); // Example ROI
+			Mat roi_img = bgr_img(roi);
+
+			// Extract the red channel and calculate the sum
+			vector<cv::Mat> channels;
+			split(roi_img, channels);
+			Mat red_channel = channels[2];
+
+			double red_sum = cv::sum(red_channel)[0];
+			
+			std::sprintf(new_label_string, "R: %.1f", red_sum[0]);
 			rectangle (frameinfo->lumaImg, Rect (Point (new_xmin,
 						new_ymin - textsize.height), textsize),
 				Scalar (yScalar), FILLED, 1, 0);
