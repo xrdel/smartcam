@@ -356,7 +356,7 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 				kpriv->font_size / 2, Scalar (uvScalar), 1, 1);
 		} else if (idx == 0) {
 			// Define the region of interest (ROI)
-			Rect roi(new_xmin, new_ymin, new_xmax, new_ymax/3); // Example ROI
+			Rect roi(new_xmin, new_ymin, new_xmax, new_ymin + (new_ymax-new_ymin)/3); // Example ROI
 			Mat roi_img = bgr_img(roi);
 
 			// Extract the red channel and calculate the sum
