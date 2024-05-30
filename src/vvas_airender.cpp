@@ -356,7 +356,7 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 				kpriv->font_size / 2, Scalar (uvScalar), 1, 1);
 		} else if (idx == 0) {
 			// Define the region of interest (ROI)
-			Rect roi(new_xmin, new_ymin, new_xmax, new_ymax); // Example ROI
+			Rect roi(new_xmin, new_ymin, new_xmax, new_ymax/3); // Example ROI
 			Mat roi_img = bgr_img(roi);
 
 			// Extract the red channel and calculate the sum
@@ -364,9 +364,9 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 			split(roi_img, channels);
 			Mat red_channel = channels[2];
 
-			double red_sum = cv::sum(red_channel)[0];
+			double red_mean = cv::mean(red_channel)[0];
 			
-			std::sprintf(new_label_string, "R: %.1f", red_sum);
+			std::sprintf(new_label_string, "R: %.1f", red_mean);
 			rectangle (frameinfo->lumaImg, Rect (Point (new_xmin,
 						new_ymin - textsize.height), textsize),
 				Scalar (yScalar), FILLED, 1, 0);
