@@ -280,7 +280,7 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 			}
 		}
 		Mat yuv_img(luma_height + luma_height / 2, luma_width, CV_8UC1);
-		memcpy(yuv_img.data, luma.data, luma_width * luma_height);
+		memcpy(yuv_img.data, frameinfo->lumaImg.data, luma_width * luma_height);
     
 		uchar* uv_ptr = yuv_img.data + luma_width * luma_height;
 		for (int i = 0; i < luma_height / 2; ++i) {
@@ -366,7 +366,7 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 
 			double red_sum = cv::sum(red_channel)[0];
 			
-			std::sprintf(new_label_string, "R: %.1f", red_sum[0]);
+			std::sprintf(new_label_string, "R: %.1f", red_sum);
 			rectangle (frameinfo->lumaImg, Rect (Point (new_xmin,
 						new_ymin - textsize.height), textsize),
 				Scalar (yScalar), FILLED, 1, 0);
