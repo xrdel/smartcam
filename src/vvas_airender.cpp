@@ -365,8 +365,10 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 			Mat red_channel = channels[2];
 
 			double red_mean = cv::mean(red_channel)[0];
+			double red_sum = cv::sum(red_channel)[0];
 			
-			std::sprintf(new_label_string, "R: %.1f", red_mean);
+			
+			std::sprintf(new_label_string, "R: %.1f, .1f, %d,  %d,  %d,  %d", red_mean, red_sum, xmin, ymin,xmax, ymax);
 			rectangle (frameinfo->lumaImg, Rect (Point (new_xmin,
 						new_ymin - textsize.height), textsize),
 				Scalar (yScalar), FILLED, 1, 0);
