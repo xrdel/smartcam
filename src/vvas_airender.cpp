@@ -399,7 +399,7 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 			double mean_red = static_cast<double>(sum_red) / pixel_count;
 			double mean_green = static_cast<double>(sum_green) / pixel_count;
 			double mean_blue = static_cast<double>(sum_blue) / pixel_count;
-			std::sprintf(new_label_string, "R: %ld, %.1f, %d,  %d,  %d,  %d, G: %.1f, B: %.1f", sum_red, mean_red, new_xmin, new_ymin, new_xmax, new_ymax, mean_green, mean_blue);
+			std::sprintf(new_label_string, "R: %.1f,G: %.1f, B: %.1f", mean_red, mean_green, mean_blue);
 			rectangle (frameinfo->lumaImg, Rect (Point (new_xmin,
 						new_ymin - textsize.height), textsize),
 				Scalar (yScalar), FILLED, 1, 0);
