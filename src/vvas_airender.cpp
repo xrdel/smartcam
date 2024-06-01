@@ -254,12 +254,6 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
       if (label_present) {
 		/* ------HERE------ */
         /* Draw filled rectangle for labelling, both on y and uv plane */
-		/*
-		Rect myROI(new_xmin, new_ymin, new_xmax, new_ymax);
-		Rect myROI_2(new_xmin/2, new_ymin/2, new_xmax/2, new_ymax/2);		
-		Mat cropped_lumaImg=frameinfo->lumaImg(myROI);
-		Mat cropped_chromaImg=frameinfo->chromaImg(myROI_2);
-		*/
 
 		Mat u_plane, v_plane;
 
@@ -279,6 +273,7 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 				v_plane.at<uchar>(i, j) = (uv_value >> 8) & 0xFF; // Extract upper 8 bits for V
 			}
 		}
+		/*
 		Mat yuv_img(luma_height + luma_height / 2, luma_width, CV_8UC1);
 		memcpy(yuv_img.data, frameinfo->lumaImg.data, luma_width * luma_height);
     
@@ -292,7 +287,7 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 		
 		Mat bgr_img;
 		cvtColor(yuv_img, bgr_img, COLOR_YUV2BGR_NV12);
-		
+		*/
 		
 		
 /*			
@@ -355,6 +350,7 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 					1000 / 2 + frameinfo->y_offset / 2), kpriv->font,
 				kpriv->font_size / 2, Scalar (uvScalar), 1, 1);
 		} else if (idx == 0) {
+			/*
 			// Define the region of interest (ROI)
 			Rect roi(new_xmin, new_ymin, new_xmax, new_ymin + (new_ymax-new_ymin)/3); // Example ROI
 			Mat roi_img = bgr_img(roi);
@@ -366,9 +362,44 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 
 			double red_mean = cv::mean(red_channel)[0];
 			double red_sum = cv::sum(red_channel)[0];
+			*/
 			
+			Rect roi(new_xmin, new_ymin, new_xmax, new_ymin + (new_ymax-new_ymin)/3); // Example ROI			
+			Mat rgbImg(roi.height, roi.width, CV_8UC3)
+			int pixel_count = 0;
+			long sum_red = 0;
+			long sum_green = 0;
+			long sum_blue = 0;
+			for (int i = roi.y; i < roi.y + roi.height; ++i) {
+				for (int j = roi.x; j < roi.x + roi.width; ++j) {
+					uchar y = lumaImg.at<uchar>(i, j);
+					uchar u = u_plane.at<uchar>(i / 2, j / 2);
+					uchar v = v_plane.at<uchar>(i / 2, j / 2);
+
+					uchar r, g, b;
+					int c = y - 16;
+					int d = u - 128;
+					int e = v - 128;
+
+					r = saturate_cast<uchar>(( 298 * c + 409 * e + 128) >> 8);
+					g = saturate_cast<uchar>(( 298 * c - 100 * d - 208 * e + 128) >> 8);
+					b = saturate_cast<uchar>(( 298 * c + 516 * d + 128) >> 8);
+
+					Vec3b &pixel = rgbImg.at<Vec3b>(i - roi.y, j - roi.x);
+					pixel[2] = r;
+					pixel[1] = g;
+					pixel[0] = b;
+					sum_red += r;
+					sum_green += g;
+					sum_blue += b;
+					++pixel_count;
+				}
+			}
 			
-			std::sprintf(new_label_string, "R: %.1f, .1f, %d,  %d,  %d,  %d", red_mean, red_sum, new_xmin, new_ymin, new_xmax, new_ymax);
+			double mean_red = static_cast<double>(sum_red) / pixel_count;
+			double mean_green = static_cast<double>(sum_green) / pixel_count;
+			double mean_blue = static_cast<double>(sum_blue) / pixel_count;
+			std::sprintf(new_label_string, "R: %ld, %.1f, %d,  %d,  %d,  %d, G: %.1f, B: %.1f", sum_red, mean_red, new_xmin, new_ymin, new_xmax, new_ymax, mean_green, mean_blue);
 			rectangle (frameinfo->lumaImg, Rect (Point (new_xmin,
 						new_ymin - textsize.height), textsize),
 				Scalar (yScalar), FILLED, 1, 0);
@@ -389,24 +420,6 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 		} else {
 			std::copy(new_label_string, new_label_string + 5, label_string);
 		}
-		
-        /*rectangle (frameinfo->lumaImg, Rect (Point (new_xmin,
-                    new_ymin - textsize.height), textsize),
-            Scalar (yScalar), FILLED, 1, 0);
-        textsize.height /= 2;
-        textsize.width /= 2;
-        rectangle (frameinfo->chromaImg, Rect (Point (new_xmin / 2,
-                    new_ymin / 2 - textsize.height), textsize),
-            Scalar (uvScalar), FILLED, 1, 0);
-
-        // Draw label text on the filled rectanngle 
-        convert_rgb_to_yuv_clrs (kpriv->label_color, &yScalar, &uvScalar);
-        putText (frameinfo->lumaImg, new_label_string, cv::Point (new_xmin,
-                new_ymin + frameinfo->y_offset), kpriv->font, kpriv->font_size,
-            Scalar (yScalar), 1, 1);
-        putText (frameinfo->chromaImg, new_label_string, cv::Point (new_xmin / 2,
-                new_ymin / 2 + frameinfo->y_offset / 2), kpriv->font,
-            kpriv->font_size / 2, Scalar (uvScalar), 1, 1);*/
       }
     } else if (frameinfo->inframe->props.fmt == VVAS_VFMT_BGR8) {
       LOG_MESSAGE (LOG_LEVEL_DEBUG, "Drawing rectangle for BGR image");
