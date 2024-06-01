@@ -226,30 +226,6 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
               new_ymax / 2), Scalar (uvScalar), kpriv->line_thickness, 1, 0);
       }
 	  
-	  /*
-      // ANDREAS
-      char debug_info[MAX_LABEL_LEN];
-      // std::sprintf(
-      //   debug_info,
-      //   "L%dx%d(%d),C%dx%d(%d),I420%dx%d(%d)",
-        // frameinfo->lumaImg.rows,
-        // frameinfo->lumaImg.cols,
-        // frameinfo->lumaImg[0],
-        // frameinfo->chromaImg.rows,
-        // frameinfo->chromaImg.cols,
-        // frameinfo->chromaImg[0],
-        // frameinfo->I420image.rows
-        // frameinfo->I420image.cols,
-        // frameinfo->I420image[0],
-      // );
-      std::sprintf(debug_info, "C%dx%d", frameinfo->I420image.rows, frameinfo->I420image.cols);
-      putText (frameinfo->lumaImg, debug_info, cv::Point (200,
-					200 + frameinfo->y_offset), kpriv->font, kpriv->font_size,
-				Scalar (yScalar), 1, 1);
-			putText (frameinfo->chromaImg, debug_info, cv::Point (200 / 2,
-					200 / 2 + frameinfo->y_offset / 2), kpriv->font,
-				kpriv->font_size / 2, Scalar (uvScalar), 1, 1);
-	  */
 	  
       if (label_present) {
 		/* ------HERE------ */
@@ -367,6 +343,7 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 			Rect roi(new_xmin, new_ymin, new_xmax, new_ymin + (new_ymax-new_ymin)/3); // Example ROI			
 			Mat rgbImg(roi.height, roi.width, CV_8UC3);
 			int pixel_count = 0;
+			int red_count = 0;
 			long sum_red = 0;
 			long sum_green = 0;
 			long sum_blue = 0;
@@ -389,9 +366,12 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 					pixel[2] = r;
 					pixel[1] = g;
 					pixel[0] = b;
-					sum_red += r;
-					sum_green += g;
-					sum_blue += b;
+					//sum_red += r;
+					//sum_green += g;
+					//sum_blue += b;
+					if (r>160){
+						++red_count;
+					}
 					++pixel_count;
 				}
 			}
@@ -399,7 +379,8 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 			double mean_red = static_cast<double>(sum_red) / pixel_count;
 			double mean_green = static_cast<double>(sum_green) / pixel_count;
 			double mean_blue = static_cast<double>(sum_blue) / pixel_count;
-			std::sprintf(new_label_string, "R: %.1f,G: %.1f, B: %.1f", mean_red, mean_green, mean_blue);
+			//std::sprintf(new_label_string, "R: %.1f,G: %.1f, B: %.1f", mean_red, mean_green, mean_blue);
+			std::sprintf(new_label_string, "R: %d, Total: %d", red_count, pixel_count);
 			rectangle (frameinfo->lumaImg, Rect (Point (new_xmin,
 						new_ymin - textsize.height), textsize),
 				Scalar (yScalar), FILLED, 1, 0);
