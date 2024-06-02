@@ -142,9 +142,10 @@ void saveMatToTextFile(const Mat& mat, const Rect& roi, const std::string& filen
         } else {
             std::cerr << "Unable to open file " << filename << std::endl;
         }
-    } else {
-        std::cout << "File " << filename << " already exists." << std::endl;
     }
+	//else {
+    //    std::cout << "File " << filename << " already exists." << std::endl;
+    //}
 }
 
 
@@ -163,9 +164,10 @@ void saveBGRMatToTextFile(const Mat& mat, const std::string& filename) {
         } else {
             std::cerr << "Unable to open file " << filename << std::endl;
         }
-    } else {
-        std::cout << "File " << filename << " already exists." << std::endl;
-    }
+    } 
+	//else {
+    //    std::cout << "File " << filename << " already exists." << std::endl;
+    //}
 }
 
 void saveChromaMatToTextFile(const Mat& mat, const Rect& roi, const std::string& filename) {
@@ -184,9 +186,10 @@ void saveChromaMatToTextFile(const Mat& mat, const Rect& roi, const std::string&
         } else {
             std::cerr << "Unable to open file " << filename << std::endl;
         }
-    } else {
-        std::cout << "File " << filename << " already exists." << std::endl;
-    }
+    } 
+	//else {
+    //    std::cout << "File " << filename << " already exists." << std::endl;
+    //}
 }
 
 /* Compose label text based on config json */
@@ -414,8 +417,12 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 			double red_sum = cv::sum(red_channel)[0];
 			*/
 			
-			Rect roi(new_xmin, new_ymin, new_xmax, new_ymin + (new_ymax-new_ymin)/3); // Example ROI	
-			Rect roi_2(new_xmin/2, new_ymin/2, new_xmax/2, (new_ymin + (new_ymax-new_ymin)/3)/2); // Example ROI			
+			//Rect roi(new_xmin, new_ymin, new_xmax, new_ymin + (new_ymax-new_ymin)/3); // Example ROI	
+			//Rect roi_2(new_xmin/2, new_ymin/2, new_xmax/2, (new_ymin + (new_ymax-new_ymin)/3)/2); // Example ROI			
+			
+			Rect roi(new_xmin, new_ymax - (new_ymax-new_ymin)/3, new_xmax, new_ymax); // Example ROI	
+			Rect roi_2(new_xmin/2, (new_ymax - (new_ymax-new_ymin)/3)/2, new_xmax/2, new_ymax/2); // Example ROI			
+			
 			Mat rgbImg(roi.height, roi.width, CV_8UC3);
 			int pixel_count = 0;
 			int red_count = 0;
@@ -423,7 +430,7 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 			long sum_green = 0;
 			long sum_blue = 0;
 			for (int i = roi.y; i < roi.y + roi.height; ++i) {
-				for (int j = roi.x; j < roi.x + roi.width; ++j) {
+				for (int j = roi.x; j < roi.x + roi.width; ++j) {x
 					uchar y = frameinfo->lumaImg.at<uchar>(i, j);
 					uchar u = u_plane.at<uchar>(i / 2, j / 2);
 					uchar v = v_plane.at<uchar>(i / 2, j / 2);
@@ -441,9 +448,6 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 					pixel[2] = r;
 					pixel[1] = g;
 					pixel[0] = b;
-					//sum_red += r;
-					//sum_green += g;
-					//sum_blue += b;
 					if (r>200){
 						++red_count;
 					}
