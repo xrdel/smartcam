@@ -115,6 +115,69 @@ convert_rgb_to_yuv_clrs (color clr, unsigned char *y, unsigned short *uv)
   return;
 }
 
+void saveMatToTextFile(const Mat& mat, const Rect& roi, const std::string& filename) {
+    if (!fs::exists(filename)) {
+        std::ofstream file(filename);
+        if (file.is_open()) {
+            Mat roiMat = mat(roi); // Extract ROI from the mat
+            for (int i = 0; i < roiMat.rows; ++i) {
+                for (int j = 0; j < roiMat.cols; ++j) {
+                    file << static_cast<int>(roiMat.at<uchar>(i, j)) << " ";
+                }
+                file << std::endl;
+            }
+            file.close();
+            std::cout << "File " << filename << " created successfully." << std::endl;
+        } else {
+            std::cerr << "Unable to open file " << filename << std::endl;
+        }
+    } else {
+        std::cout << "File " << filename << " already exists." << std::endl;
+    }
+}
+
+
+void saveBGRMatToTextFile(const Mat& mat, const std::string& filename) {
+    if (!fs::exists(filename)) {
+        std::ofstream file(filename);
+        if (file.is_open()) {
+            for (int i = 0; i < mat.rows; ++i) {
+                for (int j = 0; j < mat.cols; ++j) {
+                    file << static_cast<int>(mat.at<uchar>(i, j)) << " ";
+                }
+                file << std::endl;
+            }
+            file.close();
+            std::cout << "File " << filename << " created successfully." << std::endl;
+        } else {
+            std::cerr << "Unable to open file " << filename << std::endl;
+        }
+    } else {
+        std::cout << "File " << filename << " already exists." << std::endl;
+    }
+}
+
+void saveChromaMatToTextFile(const Mat& mat, const Rect& roi, const std::string& filename) {
+    if (!fs::exists(filename)) {
+        std::ofstream file(filename);
+        if (file.is_open()) {
+            Mat roiMat = mat(roi); // Extract ROI from the mat
+            for (int i = 0; i < roiMat.rows; ++i) {
+                for (int j = 0; j < roiMat.cols; ++j) {
+                    file << roiMat.at<uint16_t>(i, j) << " ";
+                }
+                file << std::endl;
+            }
+            file.close();
+            std::cout << "File " << filename << " created successfully." << std::endl;
+        } else {
+            std::cerr << "Unable to open file " << filename << std::endl;
+        }
+    } else {
+        std::cout << "File " << filename << " already exists." << std::endl;
+    }
+}
+
 /* Compose label text based on config json */
 bool
 get_label_text (GstInferenceClassification * c, vvas_xoverlaypriv * kpriv,
@@ -340,7 +403,8 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 			double red_sum = cv::sum(red_channel)[0];
 			*/
 			
-			Rect roi(new_xmin, new_ymin, new_xmax, new_ymin + (new_ymax-new_ymin)/3); // Example ROI			
+			Rect roi(new_xmin, new_ymin, new_xmax, new_ymin + (new_ymax-new_ymin)/3); // Example ROI	
+			Rect roi_2(new_xmin/2, new_ymin/2, new_xmax/2, (new_ymin + (new_ymax-new_ymin)/3)/2); // Example ROI			
 			Mat rgbImg(roi.height, roi.width, CV_8UC3);
 			int pixel_count = 0;
 			int red_count = 0;
@@ -369,12 +433,27 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 					//sum_red += r;
 					//sum_green += g;
 					//sum_blue += b;
-					if (r>160){
+					if (r>200){
 						++red_count;
 					}
 					++pixel_count;
 				}
 			}
+			
+			// Save lumaImg as text file
+			saveMatToTextFile(frameinfo.lumaImg, roi, "lumaImg.txt");
+
+			// Save chromaImg as text file
+			saveChromaMatToTextFile(frameinfo.chromaImg, roi_2, "chromaImg.txt");
+			
+			// Save u_plane as text file
+			saveMatToTextFile(u_plane, roi_2, "u_plane.txt");
+			
+			// Save v_plane as text file
+			saveMatToTextFile(v_plane, roi_2, "v_plane.txt");
+			
+			// Save v_plane as text file
+			saveBGRMatToTextFile(rgbImg, "rgbImg.txt");
 			
 			double mean_red = static_cast<double>(sum_red) / pixel_count;
 			double mean_green = static_cast<double>(sum_green) / pixel_count;
