@@ -19,6 +19,7 @@
 #include <opencv2/imgproc.hpp>
 #include <opencv2/imgcodecs.hpp>
 #include <iostream>
+#include <fstream>
 #include <sstream>
 #include <math.h>
 #include <vvas/vvas_kernel.h>
@@ -42,7 +43,6 @@ int log_level = LOG_LEVEL_WARNING;
 
 using namespace cv;
 using namespace std;
-namespace fs = std::filesystem;
 
 #define MAX_CLASS_LEN 1024
 #define MAX_LABEL_LEN 1024
