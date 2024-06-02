@@ -28,14 +28,14 @@
 
 #include "vvas_airender.hpp"
 
-#include <filesystem>
+#include <sys/stat.h>
+#include <unistd.h>
 
 int log_level = LOG_LEVEL_WARNING;
 
 using namespace cv;
 using namespace std;
 
-using namespace fs = std::filesystem;
 
 #define MAX_CLASS_LEN 1024
 #define MAX_LABEL_LEN 1024
@@ -120,8 +120,14 @@ convert_rgb_to_yuv_clrs (color clr, unsigned char *y, unsigned short *uv)
   return;
 }
 
+// Function to check if a file exists
+bool fileExists(const std::string& filepath) {
+    std::ifstream file(filepath);
+    return file.good();
+}
+
 void saveMatToTextFile(const Mat& mat, const Rect& roi, const std::string& filename) {
-    if (!fs::exists(filename)) {
+    if (!fileExists(filename)) {
         std::ofstream file(filename);
         if (file.is_open()) {
             Mat roiMat = mat(roi); // Extract ROI from the mat
@@ -143,7 +149,7 @@ void saveMatToTextFile(const Mat& mat, const Rect& roi, const std::string& filen
 
 
 void saveBGRMatToTextFile(const Mat& mat, const std::string& filename) {
-    if (!fs::exists(filename)) {
+    if (!fileExists(filename)) {
         std::ofstream file(filename);
         if (file.is_open()) {
             for (int i = 0; i < mat.rows; ++i) {
@@ -163,7 +169,7 @@ void saveBGRMatToTextFile(const Mat& mat, const std::string& filename) {
 }
 
 void saveChromaMatToTextFile(const Mat& mat, const Rect& roi, const std::string& filename) {
-    if (!fs::exists(filename)) {
+    if (!fileExists(filename)) {
         std::ofstream file(filename);
         if (file.is_open()) {
             Mat roiMat = mat(roi); // Extract ROI from the mat
