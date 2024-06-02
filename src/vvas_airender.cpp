@@ -30,12 +30,12 @@
 
 #include <filesystem>
 
-using namespace fs = std::filesystem;
-
 int log_level = LOG_LEVEL_WARNING;
 
 using namespace cv;
 using namespace std;
+
+using namespace fs = std::filesystem;
 
 #define MAX_CLASS_LEN 1024
 #define MAX_LABEL_LEN 1024
