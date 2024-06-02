@@ -417,11 +417,11 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 			double red_sum = cv::sum(red_channel)[0];
 			*/
 			
-			Rect roi(new_xmin, new_ymin, new_xmax, new_ymin + (new_ymax-new_ymin)/3); // Example ROI	
-			Rect roi_2(new_xmin/2, new_ymin/2, new_xmax/2, (new_ymin + (new_ymax-new_ymin)/3)/2); // Example ROI			
+			//Rect roi(new_xmin, new_ymin, new_xmax, new_ymin + (new_ymax-new_ymin)/3); // Example ROI	
+			//Rect roi_2(new_xmin/2, new_ymin/2, new_xmax/2, (new_ymin + (new_ymax-new_ymin)/3)/2); // Example ROI			
 			
-			//Rect roi(new_xmin, new_ymin + 2*(new_ymax-new_ymin)/3, new_xmax, new_ymax); // Example ROI	
-			//Rect roi_2(new_xmin/2, (new_ymin + (new_ymax-new_ymin)/3)/2, new_xmax/2, new_ymax/2); // Example ROI			
+			Rect roi(new_xmin, new_ymin + (new_ymax-new_ymin)/3, new_xmax, new_ymin + 2*(new_ymax-new_ymin)/3); // Example ROI	
+			Rect roi_2(new_xmin/2, (new_ymin + (new_ymax-new_ymin)/3)/2, new_xmax/2, (new_ymin + 2*(new_ymax-new_ymin)/3)/2); // Example ROI			
 			
 			Mat rgbImg(roi.height, roi.width, CV_8UC3);
 			int pixel_count = 0;
