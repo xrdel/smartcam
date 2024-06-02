@@ -29,15 +29,15 @@
 #include "vvas_airender.hpp"
 
 // Check if the compiler supports the filesystem library
-#if __has_include(<filesystem>)
-#include <filesystem>
-namespace fs = std::filesystem;
-#elif __has_include(<experimental/filesystem>)
+//#if __has_include(<filesystem>)
+//#include <filesystem>
+//namespace fs = std::filesystem;
+//#elif __has_include(<experimental/filesystem>)
 #include <experimental/filesystem>
 namespace fs = std::experimental::filesystem;
-#else
-#error "Filesystem library not available"
-#endif
+//#else
+//#error "Filesystem library not available"
+//#endif
 
 int log_level = LOG_LEVEL_WARNING;
 
