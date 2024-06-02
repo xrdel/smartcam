@@ -430,7 +430,7 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 			long sum_green = 0;
 			long sum_blue = 0;
 			for (int i = roi.y; i < roi.y + roi.height; ++i) {
-				for (int j = roi.x; j < roi.x + roi.width; ++j) {x
+				for (int j = roi.x; j < roi.x + roi.width; ++j) {
 					uchar y = frameinfo->lumaImg.at<uchar>(i, j);
 					uchar u = u_plane.at<uchar>(i / 2, j / 2);
 					uchar v = v_plane.at<uchar>(i / 2, j / 2);
