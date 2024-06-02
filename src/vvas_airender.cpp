@@ -19,6 +19,7 @@
 #include <opencv2/imgproc.hpp>
 #include <opencv2/imgcodecs.hpp>
 #include <iostream>
+#include <fstream>
 #include <sstream>
 #include <math.h>
 #include <vvas/vvas_kernel.h>
@@ -31,6 +32,7 @@ int log_level = LOG_LEVEL_WARNING;
 
 using namespace cv;
 using namespace std;
+namespace fs = std::filesystem;
 
 #define MAX_CLASS_LEN 1024
 #define MAX_LABEL_LEN 1024
@@ -441,10 +443,10 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 			}
 			
 			// Save lumaImg as text file
-			saveMatToTextFile(frameinfo.lumaImg, roi, "lumaImg.txt");
+			saveMatToTextFile(frameinfo->lumaImg, roi, "lumaImg.txt");
 
 			// Save chromaImg as text file
-			saveChromaMatToTextFile(frameinfo.chromaImg, roi_2, "chromaImg.txt");
+			saveChromaMatToTextFile(frameinfo->chromaImg, roi_2, "chromaImg.txt");
 			
 			// Save u_plane as text file
 			saveMatToTextFile(u_plane, roi_2, "u_plane.txt");
