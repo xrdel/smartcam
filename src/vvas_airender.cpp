@@ -204,7 +204,7 @@ void saveValuesToFile(const std::string& filename, int new_xmin, int new_xmax, i
         file << "2ndPoint_1: " << (new_ymin + 2*(new_ymax-new_ymin)/3) << std::endl;
         file << "2ndPoint_2: " << (new_ymax - (new_ymax-new_ymin)/3) << std::endl;
         file.close();
-        std::cout << "Values saved to " << filename << " successfully." << std::endl;
+    //    std::cout << "Values saved to " << filename << " successfully." << std::endl;
     } 
 	//else {
     //    std::cerr << "Unable to open file " << filename << std::endl;
@@ -345,58 +345,6 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 				v_plane.at<uchar>(i, j) = (uv_value >> 8) & 0xFF; // Extract upper 8 bits for V
 			}
 		}
-		/*
-		Mat yuv_img(luma_height + luma_height / 2, luma_width, CV_8UC1);
-		memcpy(yuv_img.data, frameinfo->lumaImg.data, luma_width * luma_height);
-    
-		uchar* uv_ptr = yuv_img.data + luma_width * luma_height;
-		for (int i = 0; i < luma_height / 2; ++i) {
-			for (int j = 0; j < luma_width / 2; ++j) {
-				uv_ptr[i * luma_width + 2 * j] = u_plane.at<uchar>(i, j);
-				uv_ptr[i * luma_width + 2 * j + 1] = v_plane.at<uchar>(i, j);
-			}
-		}
-		
-		Mat bgr_img;
-		cvtColor(yuv_img, bgr_img, COLOR_YUV2BGR_NV12);
-		*/
-		
-		
-/*			
-		int width_luma = frameinfo->lumaImg.cols;
-		int height_luma = frameinfo->lumaImg.rows;
-	
-		// Create a YUV image
-		Mat yuv_img(height_luma + height_luma / 2, width_luma, CV_8UC1);
-		memcpy(yuv_img.data, frameinfo->lumaImg.data, width_luma * height_luma);
-		memcpy(yuv_img.data + width_luma * height_luma, frameinfo->chromaImg.data, width_luma * height_luma / 2);
-
-		// Convert YUV to BGR
-		Mat bgr_img;
-		cvtColor(yuv_img, bgr_img, cv::COLOR_YUV2BGR_I420);
-		
-		std::vector<cv::Mat> bgr_channels;
-		cv::split(bgr_img, bgr_channels);
-
-		Scalar blue_sum = cv::mean(bgr_channels[0]);
-		Scalar green_sum = cv::mean(bgr_channels[1]);
-		Scalar red_sum = cv::mean(bgr_channels[2]);
-*/
-/*	
-    // Create a single NV12 image
-    cv::Mat nv12Img(height + height / 2, stride, CV_8UC1);
-
-    // Copy luma to NV12 image
-    frameinfo->lumaImg.copyTo(nv12Img(cv::Rect(0, 0, stride, height)));
-
-    // Copy chroma to NV12 image (need to reshape chroma data)
-    cv::Mat chromaReshaped(height / 2, stride, CV_8UC1, chromaBuf);
-    chromaReshaped.copyTo(nv12Img(cv::Rect(0, height, stride, height / 2)));
-
-    // Convert NV12 to BGR
-    cv::Mat bgrImg;
-    cv::cvtColor(nv12Img, bgrImg, cv::COLOR_YUV2BGR_NV12);
-	*/
 
 		if (idx == 1) {
 			//This is idx for Stop Sign
@@ -422,28 +370,16 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 					1000 / 2 + frameinfo->y_offset / 2), kpriv->font,
 				kpriv->font_size / 2, Scalar (uvScalar), 1, 1);
 		} else if (idx == 0) {
-			/*
-			// Define the region of interest (ROI)
-			Rect roi(new_xmin, new_ymin, new_xmax, new_ymin + (new_ymax-new_ymin)/3); // Example ROI
-			Mat roi_img = bgr_img(roi);
-
-			// Extract the red channel and calculate the sum
-			vector<cv::Mat> channels;
-			split(roi_img, channels);
-			Mat red_channel = channels[2];
-
-			double red_mean = cv::mean(red_channel)[0];
-			double red_sum = cv::sum(red_channel)[0];
-			*/
 			
 			Rect roi(new_xmin, new_ymin, new_xmax - new_xmin, (new_ymax - new_ymin) / 3);// Example ROI	
-			Rect roi_2(new_xmin/2, new_ymin/2, (new_xmax - new_xmin)/2, ((new_ymax-new_ymin)/3)/2); // Example ROI			
+			//Rect roi_2(new_xmin/2, new_ymin/2, (new_xmax - new_xmin)/2, ((new_ymax-new_ymin)/3)/2); // Example ROI			
+			Rect roi_down(new_xmin, new_ymin + 2*(new_ymax - new_ymin) / 3, new_xmax - new_xmin, (new_ymax - new_ymin) / 3);// Example ROI	
 			
 			//Rect roi(new_xmin, new_ymin + (new_ymax-new_ymin)/3, new_xmax, new_ymin + 2*(new_ymax-new_ymin)/3); // Example ROI	
 			//Rect roi_2(new_xmin/2, (new_ymin + (new_ymax-new_ymin)/3)/2, new_xmax/2, (new_ymin + 2*(new_ymax-new_ymin)/3)/2); // Example ROI			
 			
 			Mat rgbImg(roi.height, roi.width, CV_8UC3);
-			Mat rImg(roi.height, roi.width, CV_8UC1);
+			//Mat rImg(roi.height, roi.width, CV_8UC1);
 			int pixel_count = 0;
 			int red_count = 0;
 			long sum_red = 0;
@@ -465,45 +401,73 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 					b = saturate_cast<uchar>(( 298 * c + 516 * d + 128) >> 8);
 					
 					// Save the red value in the rImg Mat
-					rImg.at<uchar>(i - roi.y, j - roi.x) = r;
+					//rImg.at<uchar>(i - roi.y, j - roi.x) = r;
 					
 					Vec3b &pixel = rgbImg.at<Vec3b>(i - roi.y, j - roi.x);
 					pixel[2] = r;
 					pixel[1] = g;
 					pixel[0] = b;
-					if (r>200){
+					if (r>120 && g<100 && b<100){
 						++red_count;
 					}
 					++pixel_count;
 				}
 			}
 			
+			
+			int pixel_count_down = 0;
+			int red_count_down = 0;
+			long sum_red_down = 0;
+			long sum_green_down = 0;
+			long sum_blue_down = 0;
+			for (int i = roi_down.y; i < roi_down.y + roi_down.height; ++i) {
+				for (int j = roi_down.x; j < roi_down.x + roi_down.width; ++j) {
+					uchar y_down = frameinfo->lumaImg.at<uchar>(i, j);
+					uchar u_down = u_plane.at<uchar>(i / 2, j / 2);
+					uchar v_down = v_plane.at<uchar>(i / 2, j / 2);
+
+					uchar r_down, g_down, b_down;
+					int c_down = y_down - 16;
+					int d_down = u_down - 128;
+					int e_down = v_down - 128;
+
+					r_down = saturate_cast<uchar>(( 298 * c_down + 409 * e_down + 128) >> 8);
+					g_down = saturate_cast<uchar>(( 298 * c_down - 100 * d_down - 208 * e_down + 128) >> 8);
+					b_down = saturate_cast<uchar>(( 298 * c_down + 516 * d_down + 128) >> 8);
+					
+					// Save the red value in the rImg Mat
+					//rImg.at<uchar>(i - roi.y, j - roi.x) = r;
+					
+					if (r_down>120 && g_down<100 && b_down<100){
+						++red_count_down;
+					}
+					++pixel_count_down;
+				}
+			}
+			
 			// Save lumaImg as text file
-			saveMatToTextFile(frameinfo->lumaImg, roi, "lumaImg.txt");
+			//saveMatToTextFile(frameinfo->lumaImg, roi, "lumaImg.txt");
 
 			// Save chromaImg as text file
-			saveChromaMatToTextFile(frameinfo->chromaImg, roi_2, "chromaImg.txt");
+			//saveChromaMatToTextFile(frameinfo->chromaImg, roi_2, "chromaImg.txt");
 			
 			// Save u_plane as text file
-			saveMatToTextFile(u_plane, roi_2, "u_plane.txt");
+			//saveMatToTextFile(u_plane, roi_2, "u_plane.txt");
 			
 			// Save v_plane as text file
-			saveMatToTextFile(v_plane, roi_2, "v_plane.txt");
+			//saveMatToTextFile(v_plane, roi_2, "v_plane.txt");
 			
 			// Save rbgImg as text file
-			saveBGRMatToTextFile(rgbImg, "rgbImg.txt");
+			//saveBGRMatToTextFile(rgbImg, "rgbImg.txt");
 			
 			// Save rImg as text file
-			saveBGRMatToTextFile(rImg, "rImg.txt");
+			//saveBGRMatToTextFile(rImg, "rImg.txt");
 			
 			// Save values to a txt file
 			saveValuesToFile("values.txt", new_xmin, new_xmax, new_ymin, new_ymax);
 			
-			double mean_red = static_cast<double>(sum_red) / pixel_count;
-			double mean_green = static_cast<double>(sum_green) / pixel_count;
-			double mean_blue = static_cast<double>(sum_blue) / pixel_count;
 			//std::sprintf(new_label_string, "R: %.1f,G: %.1f, B: %.1f", mean_red, mean_green, mean_blue);
-			std::sprintf(new_label_string, "R: %d, Total: %d", red_count, pixel_count);
+			std::sprintf(new_label_string, "R: %d, Tot: %d| R_d: %d, Tot_d: %d", red_count, pixel_count, red_count_down, pixel_count_down);
 			rectangle (frameinfo->lumaImg, Rect (Point (new_xmin,
 						new_ymin - textsize.height), textsize),
 				Scalar (yScalar), FILLED, 1, 0);
