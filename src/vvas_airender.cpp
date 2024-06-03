@@ -192,6 +192,24 @@ void saveChromaMatToTextFile(const Mat& mat, const Rect& roi, const std::string&
     //}
 }
 
+void saveValuesToFile(const std::string& filename, int new_xmin, int new_xmax, int new_ymin, int new_ymax) {
+    std::ofstream file(filename);
+    if (file.is_open()) {
+        file << "new_xmin: " << new_xmin << std::endl;
+        file << "new_xmax: " << new_xmax << std::endl;
+        file << "new_ymin: " << new_ymin << std::endl;
+        file << "new_ymax: " << new_ymax << std::endl;
+        file << "1stPoint_1: " << (new_ymin + (new_ymax-new_ymin)/3) << std::endl;
+        file << "1stPoint_2: " << (new_ymax - 2*(new_ymax-new_ymin)/3) << std::endl;
+        file << "2ndPoint_1: " << (new_ymin + 2*(new_ymax-new_ymin)/3) << std::endl;
+        file << "2ndPoint_2: " << (new_ymax - (new_ymax-new_ymin)/3) << std::endl;
+        file.close();
+        std::cout << "Values saved to " << filename << " successfully." << std::endl;
+    } else {
+        std::cerr << "Unable to open file " << filename << std::endl;
+    }
+}
+
 /* Compose label text based on config json */
 bool
 get_label_text (GstInferenceClassification * c, vvas_xoverlaypriv * kpriv,
@@ -424,6 +442,7 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 			Rect roi_2(new_xmin/2, (new_ymin + (new_ymax-new_ymin)/3)/2, new_xmax/2, (new_ymin + 2*(new_ymax-new_ymin)/3)/2); // Example ROI			
 			
 			Mat rgbImg(roi.height, roi.width, CV_8UC3);
+			Mat rImg(roi.height, roi.width, CV_8UC1);
 			int pixel_count = 0;
 			int red_count = 0;
 			long sum_red = 0;
@@ -443,7 +462,10 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 					r = saturate_cast<uchar>(( 298 * c + 409 * e + 128) >> 8);
 					g = saturate_cast<uchar>(( 298 * c - 100 * d - 208 * e + 128) >> 8);
 					b = saturate_cast<uchar>(( 298 * c + 516 * d + 128) >> 8);
-
+					
+					// Save the red value in the rImg Mat
+					rImg.at<uchar>(i - roi.y, j - roi.x) = r;
+					
 					Vec3b &pixel = rgbImg.at<Vec3b>(i - roi.y, j - roi.x);
 					pixel[2] = r;
 					pixel[1] = g;
@@ -467,8 +489,14 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 			// Save v_plane as text file
 			saveMatToTextFile(v_plane, roi_2, "v_plane.txt");
 			
-			// Save v_plane as text file
+			// Save rbgImg as text file
 			saveBGRMatToTextFile(rgbImg, "rgbImg.txt");
+			
+			// Save rImg as text file
+			saveBGRMatToTextFile(rImg, "rImg.txt");
+			
+			// Save values to a txt file
+			saveValuesToFile("values.txt", new_xmin, new_xmax, new_ymin, new_ymax);
 			
 			double mean_red = static_cast<double>(sum_red) / pixel_count;
 			double mean_green = static_cast<double>(sum_green) / pixel_count;
