@@ -352,7 +352,7 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 			//std::sprintf(new_label_string, "Dy = %d and Dx = %d", new_ymax-new_ymin, new_xmax-new_xmin);
 			stop_dist = ceil(5*200/(new_ymax-new_ymin));
 			std::sprintf(new_label_string, "Pixels: < %d ", new_ymax-new_ymin);
-			std::sprintf(new_label_string_2, "IN < %d m", new_ymax-new_ymin);
+			std::sprintf(new_label_string_2, "IN < %d m", stop_dist);
 			
 			rectangle (frameinfo->lumaImg, Rect (Point (new_xmin,
 						new_ymin - textsize.height), textsize),
@@ -438,7 +438,7 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 			// Save values to a txt file
 			saveValuesToFile("values.txt", new_xmin, new_xmax, new_ymin, new_ymax);
 			
-			std::sprintf(new_label_string, "Red Pixels: %d, Total Pixels: %d", red_count, pixel_count);
+			std::sprintf(new_label_string, "Red Pixels: %d, Total: %d", red_count, pixel_count);
 			std::sprintf(new_label_string_2, "STOP");
 			
 			rectangle (frameinfo->lumaImg, Rect (Point (new_xmin,
@@ -461,10 +461,10 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 				
 			/* Draw STOP message if Traffic Light is RED */
 			if (20*red_count > pixel_count){
-				putText (frameinfo->lumaImg, new_label_string_2, cv::Point (250,
+				putText (frameinfo->lumaImg, new_label_string_2, cv::Point (100,
 					100 + frameinfo->y_offset), kpriv->font, kpriv->font_size,
 				Scalar (yScalar), 1, 1);
-				putText (frameinfo->chromaImg, new_label_string_2, cv::Point (250 / 2,
+				putText (frameinfo->chromaImg, new_label_string_2, cv::Point (100 / 2,
 					100 / 2 + frameinfo->y_offset / 2), kpriv->font,
 				kpriv->font_size / 2, Scalar (uvScalar), 1, 1);
 			}	
