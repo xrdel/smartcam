@@ -460,7 +460,7 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 				kpriv->font_size / 2, Scalar (uvScalar), 1, 1);
 				
 			/* Draw STOP message if Traffic Light is RED */
-			if (20*red_count > pixel_count){
+			if (225*red_count > pixel_count){
 				putText (frameinfo->lumaImg, new_label_string_2, cv::Point (100,
 					100 + frameinfo->y_offset), kpriv->font, kpriv->font_size,
 				Scalar (yScalar), 1, 1);
