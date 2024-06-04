@@ -267,6 +267,7 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 
     char label_string[MAX_LABEL_LEN];
 	char new_label_string[MAX_LABEL_LEN];
+	char new_label_string_2[MAX_LABEL_LEN];
     bool label_present;
     Size textsize;
     label_present = get_label_text (classification, kpriv, label_string);
@@ -349,42 +350,46 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 		if (idx == 1) {
 			//This is idx for Stop Sign
 			//std::sprintf(new_label_string, "Dy = %d and Dx = %d", new_ymax-new_ymin, new_xmax-new_xmin);
-			std::sprintf(new_label_string, "C%dx%d", frameinfo->I420image.rows, frameinfo->I420image.cols);
 			stop_dist = ceil(5*200/(new_ymax-new_ymin));
-			std::sprintf(new_label_string, "IN < %d m", stop_dist);
-			rectangle (frameinfo->lumaImg, Rect (Point (1000,
-						1000 - textsize.height), textsize),
+			std::sprintf(new_label_string, "Pixels: < %d ", new_ymax-new_ymin);
+			std::sprintf(new_label_string_2, "IN < %d m", new_ymax-new_ymin);
+			
+			rectangle (frameinfo->lumaImg, Rect (Point (new_xmin,
+						new_ymin - textsize.height), textsize),
 				Scalar (yScalar), FILLED, 1, 0);
 			textsize.height /= 2;
 			textsize.width /= 2;
-			rectangle (frameinfo->chromaImg, Rect (Point (1000 / 2,
-						1000 / 2 - textsize.height), textsize),
+			rectangle (frameinfo->chromaImg, Rect (Point (new_xmin / 2,
+						new_ymin / 2 - textsize.height), textsize),
 				Scalar (uvScalar), FILLED, 1, 0);
 				
 			/* Draw label text on the filled rectanngle */
 			convert_rgb_to_yuv_clrs (kpriv->label_color, &yScalar, &uvScalar);
-			putText (frameinfo->lumaImg, new_label_string, cv::Point (1000,
-					1000 + frameinfo->y_offset), kpriv->font, kpriv->font_size,
+			putText (frameinfo->lumaImg, new_label_string, cv::Point (new_xmin,
+					new_ymin + frameinfo->y_offset), kpriv->font, kpriv->font_size,
 				Scalar (yScalar), 1, 1);
-			putText (frameinfo->chromaImg, new_label_string, cv::Point (1000 / 2,
-					1000 / 2 + frameinfo->y_offset / 2), kpriv->font,
+			putText (frameinfo->chromaImg, new_label_string, cv::Point (new_xmin / 2,
+					new_ymin / 2 + frameinfo->y_offset / 2), kpriv->font,
 				kpriv->font_size / 2, Scalar (uvScalar), 1, 1);
+				
+			/* Draw message about distance from Stop Sign */
+			putText (frameinfo->lumaImg, new_label_string_2, cv::Point (250,
+					100 + frameinfo->y_offset), kpriv->font, kpriv->font_size,
+				Scalar (yScalar), 1, 1);
+			putText (frameinfo->chromaImg, new_label_string_2, cv::Point (250 / 2,
+					100 / 2 + frameinfo->y_offset / 2), kpriv->font,
+				kpriv->font_size / 2, Scalar (uvScalar), 1, 1);
+
 		} else if (idx == 0) {
 			
 			Rect roi(new_xmin, new_ymin, new_xmax - new_xmin, (new_ymax - new_ymin) / 3);// Example ROI	
 			//Rect roi_2(new_xmin/2, new_ymin/2, (new_xmax - new_xmin)/2, ((new_ymax-new_ymin)/3)/2); // Example ROI			
 			Rect roi_down(new_xmin, new_ymin + 2*(new_ymax - new_ymin) / 3, new_xmax - new_xmin, (new_ymax - new_ymin) / 3);// Example ROI	
-			
-			//Rect roi(new_xmin, new_ymin + (new_ymax-new_ymin)/3, new_xmax, new_ymin + 2*(new_ymax-new_ymin)/3); // Example ROI	
-			//Rect roi_2(new_xmin/2, (new_ymin + (new_ymax-new_ymin)/3)/2, new_xmax/2, (new_ymin + 2*(new_ymax-new_ymin)/3)/2); // Example ROI			
+				
 			
 			Mat rgbImg(roi.height, roi.width, CV_8UC3);
-			//Mat rImg(roi.height, roi.width, CV_8UC1);
 			int pixel_count = 0;
 			int red_count = 0;
-			long sum_red = 0;
-			long sum_green = 0;
-			long sum_blue = 0;
 			for (int i = roi.y; i < roi.y + roi.height; ++i) {
 				for (int j = roi.x; j < roi.x + roi.width; ++j) {
 					uchar y = frameinfo->lumaImg.at<uchar>(i, j);
@@ -399,10 +404,7 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 					r = saturate_cast<uchar>(( 298 * c + 409 * e + 128) >> 8);
 					g = saturate_cast<uchar>(( 298 * c - 100 * d - 208 * e + 128) >> 8);
 					b = saturate_cast<uchar>(( 298 * c + 516 * d + 128) >> 8);
-					
-					// Save the red value in the rImg Mat
-					//rImg.at<uchar>(i - roi.y, j - roi.x) = r;
-					
+										
 					Vec3b &pixel = rgbImg.at<Vec3b>(i - roi.y, j - roi.x);
 					pixel[2] = r;
 					pixel[1] = g;
@@ -414,36 +416,6 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 				}
 			}
 			
-			
-			int pixel_count_down = 0;
-			int red_count_down = 0;
-			long sum_red_down = 0;
-			long sum_green_down = 0;
-			long sum_blue_down = 0;
-			for (int i = roi_down.y; i < roi_down.y + roi_down.height; ++i) {
-				for (int j = roi_down.x; j < roi_down.x + roi_down.width; ++j) {
-					uchar y_down = frameinfo->lumaImg.at<uchar>(i, j);
-					uchar u_down = u_plane.at<uchar>(i / 2, j / 2);
-					uchar v_down = v_plane.at<uchar>(i / 2, j / 2);
-
-					uchar r_down, g_down, b_down;
-					int c_down = y_down - 16;
-					int d_down = u_down - 128;
-					int e_down = v_down - 128;
-
-					r_down = saturate_cast<uchar>(( 298 * c_down + 409 * e_down + 128) >> 8);
-					g_down = saturate_cast<uchar>(( 298 * c_down - 100 * d_down - 208 * e_down + 128) >> 8);
-					b_down = saturate_cast<uchar>(( 298 * c_down + 516 * d_down + 128) >> 8);
-					
-					// Save the red value in the rImg Mat
-					//rImg.at<uchar>(i - roi.y, j - roi.x) = r;
-					
-					if (r_down>120 && g_down<100 && b_down<100){
-						++red_count_down;
-					}
-					++pixel_count_down;
-				}
-			}
 			
 			// Save lumaImg as text file
 			//saveMatToTextFile(frameinfo->lumaImg, roi, "lumaImg.txt");
@@ -466,8 +438,9 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 			// Save values to a txt file
 			saveValuesToFile("values.txt", new_xmin, new_xmax, new_ymin, new_ymax);
 			
-			//std::sprintf(new_label_string, "R: %.1f,G: %.1f, B: %.1f", mean_red, mean_green, mean_blue);
-			std::sprintf(new_label_string, "R: %d, Tot: %d| R_d: %d, Tot_d: %d", red_count, pixel_count, red_count_down, pixel_count_down);
+			std::sprintf(new_label_string, "Red Pixels: %d, Total Pixels: %d", red_count, pixel_count);
+			std::sprintf(new_label_string_2, "STOP");
+			
 			rectangle (frameinfo->lumaImg, Rect (Point (new_xmin,
 						new_ymin - textsize.height), textsize),
 				Scalar (yScalar), FILLED, 1, 0);
@@ -485,6 +458,16 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 			putText (frameinfo->chromaImg, new_label_string, cv::Point (new_xmin / 2,
 					new_ymin / 2 + frameinfo->y_offset / 2), kpriv->font,
 				kpriv->font_size / 2, Scalar (uvScalar), 1, 1);
+				
+			/* Draw STOP message if Traffic Light is RED */
+			if (20*red_count > pixel_count){
+				putText (frameinfo->lumaImg, new_label_string_2, cv::Point (250,
+					100 + frameinfo->y_offset), kpriv->font, kpriv->font_size,
+				Scalar (yScalar), 1, 1);
+				putText (frameinfo->chromaImg, new_label_string_2, cv::Point (250 / 2,
+					100 / 2 + frameinfo->y_offset / 2), kpriv->font,
+				kpriv->font_size / 2, Scalar (uvScalar), 1, 1);
+			}	
 		} else {
 			std::copy(new_label_string, new_label_string + 5, label_string);
 		}

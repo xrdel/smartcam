@@ -14,7 +14,7 @@ model {
     layer_name: "58"
     layer_name: "66"
     layer_name: "74"
-    conf_threshold: 0.4
+    conf_threshold: 0.32
     nms_threshold: 0.45
     biases: 10 
     biases: 13
