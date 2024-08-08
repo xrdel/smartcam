@@ -353,7 +353,7 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 			stop_dist = ceil(5*200/(new_ymax-new_ymin));
 			//std::sprintf(new_label_string, "Pixels: < %d ", new_ymax-new_ymin);
 			std::sprintf(new_label_string_2, "IN < %d m", stop_dist);
-			
+			/*
 			rectangle (frameinfo->lumaImg, Rect (Point (new_xmin,
 						new_ymin - textsize.height), textsize),
 				Scalar (yScalar), FILLED, 1, 0);
@@ -363,7 +363,7 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 						new_ymin / 2 - textsize.height), textsize),
 				Scalar (uvScalar), FILLED, 1, 0);
 				
-			/* Draw label text on the filled rectanngle */
+			// Draw label text on the filled rectanngle 
 			convert_rgb_to_yuv_clrs (kpriv->label_color, &yScalar, &uvScalar);
 			putText (frameinfo->lumaImg, new_label_string, cv::Point (new_xmin,
 					new_ymin + frameinfo->y_offset), kpriv->font, kpriv->font_size,
@@ -371,7 +371,7 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 			putText (frameinfo->chromaImg, new_label_string, cv::Point (new_xmin / 2,
 					new_ymin / 2 + frameinfo->y_offset / 2), kpriv->font,
 				kpriv->font_size / 2, Scalar (uvScalar), 1, 1);
-				
+				*/
 			/* Draw message about distance from Stop Sign */
 			putText (frameinfo->lumaImg, new_label_string_2, cv::Point (250,
 					100 + frameinfo->y_offset), kpriv->font, kpriv->font_size,
@@ -440,7 +440,7 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 			
 			//std::sprintf(new_label_string, "Red Pixels: %d, Total: %d", red_count, pixel_count);
 			std::sprintf(new_label_string_2, "STOP");
-			
+			/*
 			rectangle (frameinfo->lumaImg, Rect (Point (new_xmin,
 						new_ymin - textsize.height), textsize),
 				Scalar (yScalar), FILLED, 1, 0);
@@ -450,7 +450,7 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 						new_ymin / 2 - textsize.height), textsize),
 				Scalar (uvScalar), FILLED, 1, 0);
 
-			/* Draw label text on the filled rectanngle */
+			// Draw label text on the filled rectanngle
 			convert_rgb_to_yuv_clrs (kpriv->label_color, &yScalar, &uvScalar);
 			putText (frameinfo->lumaImg, new_label_string, cv::Point (new_xmin,
 					new_ymin + frameinfo->y_offset), kpriv->font, kpriv->font_size,
@@ -458,7 +458,7 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 			putText (frameinfo->chromaImg, new_label_string, cv::Point (new_xmin / 2,
 					new_ymin / 2 + frameinfo->y_offset / 2), kpriv->font,
 				kpriv->font_size / 2, Scalar (uvScalar), 1, 1);
-				
+			*/
 			/* Draw STOP message if Traffic Light is RED */
 			if (225*red_count > pixel_count){
 				putText (frameinfo->lumaImg, new_label_string_2, cv::Point (50,
