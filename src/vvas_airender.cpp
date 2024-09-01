@@ -350,28 +350,10 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 		if (idx == 1) {
 			//This is idx for Stop Sign
 			//std::sprintf(new_label_string, "Dy = %d and Dx = %d", new_ymax-new_ymin, new_xmax-new_xmin);
-			stop_dist = ceil(5*200/(new_ymax-new_ymin));
+			stop_dist = ceil(1040/(new_ymax-new_ymin));
 			//std::sprintf(new_label_string, "Pixels: < %d ", new_ymax-new_ymin);
 			std::sprintf(new_label_string_2, "IN < %d m", stop_dist);
-			/*
-			rectangle (frameinfo->lumaImg, Rect (Point (new_xmin,
-						new_ymin - textsize.height), textsize),
-				Scalar (yScalar), FILLED, 1, 0);
-			textsize.height /= 2;
-			textsize.width /= 2;
-			rectangle (frameinfo->chromaImg, Rect (Point (new_xmin / 2,
-						new_ymin / 2 - textsize.height), textsize),
-				Scalar (uvScalar), FILLED, 1, 0);
-				
-			// Draw label text on the filled rectanngle 
-			convert_rgb_to_yuv_clrs (kpriv->label_color, &yScalar, &uvScalar);
-			putText (frameinfo->lumaImg, new_label_string, cv::Point (new_xmin,
-					new_ymin + frameinfo->y_offset), kpriv->font, kpriv->font_size,
-				Scalar (yScalar), 1, 1);
-			putText (frameinfo->chromaImg, new_label_string, cv::Point (new_xmin / 2,
-					new_ymin / 2 + frameinfo->y_offset / 2), kpriv->font,
-				kpriv->font_size / 2, Scalar (uvScalar), 1, 1);
-				*/
+
 			/* Draw message about distance from Stop Sign */
 			putText (frameinfo->lumaImg, new_label_string_2, cv::Point (250,
 					100 + frameinfo->y_offset), kpriv->font, kpriv->font_size,
@@ -382,8 +364,7 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 
 		} else if (idx == 0) {
 			
-			Rect roi(new_xmin, new_ymin, new_xmax - new_xmin, (new_ymax - new_ymin) / 3);// Example ROI	
-			//Rect roi_2(new_xmin/2, new_ymin/2, (new_xmax - new_xmin)/2, ((new_ymax-new_ymin)/3)/2); // Example ROI			
+			Rect roi(new_xmin, new_ymin, new_xmax - new_xmin, (new_ymax - new_ymin) / 3);// ROI			
 			Rect roi_down(new_xmin, new_ymin + 2*(new_ymax - new_ymin) / 3, new_xmax - new_xmin, (new_ymax - new_ymin) / 3);// Example ROI	
 				
 			
@@ -440,31 +421,13 @@ overlay_node_foreach (GNode * node, gpointer kpriv_ptr)
 			
 			//std::sprintf(new_label_string, "Red Pixels: %d, Total: %d", red_count, pixel_count);
 			std::sprintf(new_label_string_2, "STOP");
-			/*
-			rectangle (frameinfo->lumaImg, Rect (Point (new_xmin,
-						new_ymin - textsize.height), textsize),
-				Scalar (yScalar), FILLED, 1, 0);
-			textsize.height /= 2;
-			textsize.width /= 2;
-			rectangle (frameinfo->chromaImg, Rect (Point (new_xmin / 2,
-						new_ymin / 2 - textsize.height), textsize),
-				Scalar (uvScalar), FILLED, 1, 0);
 
-			// Draw label text on the filled rectanngle
-			convert_rgb_to_yuv_clrs (kpriv->label_color, &yScalar, &uvScalar);
-			putText (frameinfo->lumaImg, new_label_string, cv::Point (new_xmin,
-					new_ymin + frameinfo->y_offset), kpriv->font, kpriv->font_size,
-				Scalar (yScalar), 1, 1);
-			putText (frameinfo->chromaImg, new_label_string, cv::Point (new_xmin / 2,
-					new_ymin / 2 + frameinfo->y_offset / 2), kpriv->font,
-				kpriv->font_size / 2, Scalar (uvScalar), 1, 1);
-			*/
 			/* Draw STOP message if Traffic Light is RED */
 			if (225*red_count > pixel_count){
 				putText (frameinfo->lumaImg, new_label_string_2, cv::Point (50,
 					100 + frameinfo->y_offset), kpriv->font, kpriv->font_size,
 				Scalar (yScalar), 1, 1);
-				putText (frameinfo->chromaImg, new_label_string_2, cv::Point (100 / 2,
+				putText (frameinfo->chromaImg, new_label_string_2, cv::Point (50 / 2,
 					100 / 2 + frameinfo->y_offset / 2), kpriv->font,
 				kpriv->font_size / 2, Scalar (uvScalar), 1, 1);
 			}	
